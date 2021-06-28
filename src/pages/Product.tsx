@@ -8,7 +8,7 @@ export default function Product() {
   const { id } = useParams()
 
   const product = useSelector((state: AppState) =>
-    state.product.inCart.find(p => p.id === id)
+    state.product.inCart.find((p) => p.id === id)
   )
 
   if (!product) {
