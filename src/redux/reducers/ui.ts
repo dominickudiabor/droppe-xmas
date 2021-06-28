@@ -1,4 +1,4 @@
-import { TOGGLE_DIALOG, UiState, UiActions } from '../../types'
+import { TOGGLE_DIALOG, UiActions, UiState } from '../types'
 
 const defaultState: UiState = {
   dialogOpen: {},

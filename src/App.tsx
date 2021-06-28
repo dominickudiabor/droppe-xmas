@@ -1,11 +1,12 @@
+import { Home } from 'pages/Home'
 import React from 'react'
-
-import Routes from './Routes'
+import { Route, Switch } from 'react-router-dom'
+import 'scss/main.scss'
 
 export default function App() {
   return (
-    <>
-      <Routes />
-    </>
+    <Switch>
+      <Route exact path="/" component={Home} />
+    </Switch>
   )
 }
