@@ -1,25 +1,16 @@
-import { TOGGLE_DIALOG, UiActions, UiState } from '../types'
+import { UiState } from 'redux/models'
+import { UiActions } from '../types/ui.types'
 
 const defaultState: UiState = {
-  dialogOpen: {},
+  loading: false,
 }
 
-export default function ui(
-  state: UiState = defaultState,
-  action: UiActions
-): UiState {
+export function ui(state: UiState = defaultState, action: UiActions): UiState {
   switch (action.type) {
-  case TOGGLE_DIALOG: {
-    return {
-      ...state,
-      dialogOpen: {
-        ...state.dialogOpen,
-        [action.payload.dialog]: !state.dialogOpen[action.payload.dialog],
-      },
-    }
-  }
+  case 'SET_LOADING':
+    return { ...state, loading: action.payload.isLoading }
 
   default:
-    return state
+    return { ...state }
   }
 }

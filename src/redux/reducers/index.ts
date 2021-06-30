@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import ui from './ui'
+import { ui } from './ui'
 
 const createRootReducer = () =>
   combineReducers({

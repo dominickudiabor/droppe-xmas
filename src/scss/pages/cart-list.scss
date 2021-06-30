@@ -1,6 +1,9 @@
 .list {
-  .list__item {
+  .list__item:not(:last-child) {
     border-bottom: 1px solid black;
+  }
+
+  .list__item {
     padding: 2% 1%;
     display: flex;
     justify-content: space-between;
@@ -8,14 +11,6 @@
     p > span {
       font-size: large;
       color: #008cff;
-    }
-
-    button {
-      padding: 0 5%;
-      background-color: #00aeff;
-      color: white;
-      border: none;
-      border-radius: 5px;
     }
   }
 }

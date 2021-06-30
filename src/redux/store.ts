@@ -1,13 +1,13 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import thunk from 'redux-thunk'
+import { AppState } from './models'
 import createRootReducer from './reducers'
 import rootSaga from './sagas'
-import { AppState } from './types'
 
 const initState: AppState = {
   ui: {
-    dialogOpen: {},
+    loading: false,
   },
 }
 

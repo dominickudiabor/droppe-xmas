@@ -1,10 +1,10 @@
-import { DialogType, ToggleDialogAction, TOGGLE_DIALOG } from '../types'
+import { SET_LOADING } from 'redux/types/ui.types'
 
-export function toggleDialog(dialog: DialogType): ToggleDialogAction {
+export const setLoading = (isLoading: boolean) => {
   return {
-    type: TOGGLE_DIALOG,
+    type: SET_LOADING,
     payload: {
-      dialog,
+      isLoading,
     },
   }
 }
