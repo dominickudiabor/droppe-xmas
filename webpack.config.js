@@ -28,4 +28,12 @@ module.exports = {
     contentBase: path.resolve(__dirname, './public'),
     hot: true,
   },
+  plugins: [
+    {
+      plugin: sassResourcesLoader,
+      options: {
+        resources: './src/scss/abstract/_mixins.scss',
+      },
+    },
+  ],
 }
