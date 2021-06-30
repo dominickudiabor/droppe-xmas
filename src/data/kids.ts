@@ -1,9 +1,9 @@
 export const KIDS = {
   cartList: [
-    { name: 'Joey', age: 17 },
-    { name: 'Craig', age: 15 },
-    { name: 'Alicia', age: 6 },
-    { name: 'Jennifer', age: 11 },
-    { name: 'Aeon', age: 12 },
+    { id: 1, name: 'Joey', age: 17 },
+    { id: 2, name: 'Craig', age: 15 },
+    { id: 3, name: 'Alicia', age: 6 },
+    { id: 4, name: 'Jennifer', age: 11 },
+    { id: 5, name: 'Aeon', age: 12 },
   ],
 }
