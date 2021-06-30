@@ -9,6 +9,12 @@ const initState: AppState = {
   ui: {
     loading: false,
   },
+  cart: {
+    products: [],
+    wishLists: {},
+    approved: [],
+    discarded: [],
+  },
 }
 
 export default function makeStore(initialState = initState) {

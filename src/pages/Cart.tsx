@@ -9,7 +9,7 @@ import { AppState } from 'redux/models'
 import cartService from 'services/cartService'
 
 export const Cart: React.FC = (props) => {
-  const { id } = useParams()
+  const { id } = useParams<{ id: string }>()
   const history = useHistory()
   const dispatch = useDispatch()
   const { loading } = useSelector((state: AppState) => state.ui)
@@ -17,7 +17,7 @@ export const Cart: React.FC = (props) => {
   useEffect(() => {
     dispatch(setLoading(true))
     async function loadList() {
-      const wishList = await cartService.fetchWishList(id)
+      const wishList = await cartService.fetchWishList(parseInt(id), 'single')
       dispatch(setLoading(false))
       console.log(wishList)
     }
@@ -30,7 +30,11 @@ export const Cart: React.FC = (props) => {
 
   return (
     <Page>
-      <Card title={`Wishlist - ${KIDS.cartList.find((a) => a.id == id)?.name}`}>
+      <Card
+        title={`Wishlist - ${
+          KIDS.cartList.find((a) => a.id === parseInt(id))?.name
+        }`}
+      >
         <div>List Goes Here</div>
         <button onClick={() => history.goBack()}>Return to CartList</button>
       </Card>

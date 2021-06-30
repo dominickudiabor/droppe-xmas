@@ -1,12 +1,13 @@
 import axios from 'axios'
 import { Cart } from 'pages/Cart'
 import { CartList } from 'pages/CartList'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import 'scss/main.scss'
 
 export default function App() {
   axios.defaults.baseURL = process.env.REACT_APP_BASE_URL
+  useEffect(() => {})
 
   return (
     <Switch>
