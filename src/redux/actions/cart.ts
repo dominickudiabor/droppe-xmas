@@ -1,6 +1,6 @@
+import { DetailProductList } from 'types'
 import {
   CartActions,
-  DetailProductList,
   FETCH_WISHLIST,
   LOAD_UI_WITH_FETCHED_WISHLIST,
 } from '../types/cart.types'

@@ -1,12 +1,8 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 import { loadUiWithFetchedWishList, setLoading } from 'redux/actions'
-import {
-  FetchWishList,
-  FETCH_WISHLIST,
-  UpdatedListItems,
-  WishList,
-} from 'redux/types/cart.types'
+import { FetchWishList, FETCH_WISHLIST } from 'redux/types/cart.types'
 import cartService from 'services/cartService'
+import { UpdatedListItems, WishList } from 'types'
 
 export function* onfetchWishListAndUpdateUi({
   payload: { id, name },

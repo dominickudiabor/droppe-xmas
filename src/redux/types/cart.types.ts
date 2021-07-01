@@ -1,3 +1,5 @@
+import { DetailProductList, UpdatedListItems } from 'types'
+
 export const FETCH_WISHLIST = 'FETCH_WISHLIST'
 export const LOAD_UI_WITH_FETCHED_WISHLIST = 'LOAD_UI_WITH_FETCHED_WISHLIST'
 
@@ -21,25 +23,3 @@ export type LoadUiWithFetchedWishlist = {
 }
 
 export type CartActions = FetchWishList | LoadUiWithFetchedWishlist
-
-export interface WishItems {
-  productId: number
-  quantity: number
-}
-export interface ItemDetails {
-  id: number
-  title: string
-  price: number
-  description: string
-  image: string
-  categoty: string
-}
-export interface UpdatedListItems extends WishItems, ItemDetails {}
-export interface WishList {
-  products: WishItems[]
-}
-
-export interface DetailProductList {
-  list: UpdatedListItems[]
-  name: string
-}

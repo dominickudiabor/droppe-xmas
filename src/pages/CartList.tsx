@@ -5,15 +5,14 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { fetchWishList } from 'redux/actions/cart'
+import { CartListProperties } from 'types'
 import { v4 as uuidv4 } from 'uuid'
 
 export const CartList = () => {
   const history = useHistory()
   const dispatch = useDispatch()
 
-  function renderCartList(
-    cartList: { id: number; name: string; age: number }[]
-  ) {
+  function renderCartList(cartList: CartListProperties[]) {
     return cartList.map((c) => (
       <div key={uuidv4()} className="list__item">
         <p>

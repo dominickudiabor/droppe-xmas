@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { WishItems } from 'redux/types/cart.types'
+import { UpdatedListItems, WishItems } from 'types'
 
 export default {
   fetchListPerChild: async (
@@ -15,11 +15,12 @@ export default {
     }
   },
   loopListFetchProducts: async (list: WishItems[]) => {
-    const accList = []
+    const accList: UpdatedListItems[] = []
     try {
-      for (let i = 1; i <= list.length; i++) {
-        const response = await axios.get(`/products/${i}`)
-        accList.push({ ...response.data, ...list[i - 1] })
+      for (let i = 0; i < list.length; i++) {
+        const productId = list[i].productId
+        const response = await axios.get(`/products/${productId}`)
+        accList.push({ ...response.data, ...list[i] })
       }
       return accList
     } catch (error) {
