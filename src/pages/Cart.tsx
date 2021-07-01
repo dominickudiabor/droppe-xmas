@@ -1,5 +1,6 @@
 import { Card } from 'components/card'
 import { Page } from 'components/page'
+import Spinner from 'components/spinner'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
@@ -11,7 +12,7 @@ export const Cart: React.FC = () => {
   const { loading } = useSelector((state: AppState) => state.ui)
 
   if (loading) {
-    return <div>loading...</div>
+    return <Spinner />
   }
 
   return (
