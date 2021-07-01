@@ -2,11 +2,14 @@ import { Card } from 'components/card'
 import { Page } from 'components/page'
 import { KIDS } from 'data/kids'
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { fetchWishList } from 'redux/actions/cart'
 import { v4 as uuidv4 } from 'uuid'
 
 export const CartList = () => {
   const history = useHistory()
+  const dispatch = useDispatch()
 
   function renderCartList(
     cartList: { id: number; name: string; age: number }[]
@@ -16,9 +19,14 @@ export const CartList = () => {
         <p>
           <span>{c.name},</span> <span>{c.age}years</span>
         </p>
-        <button onClick={() => history.push(`/cart/${c.id}`)}>View Cart</button>
+        <button onClick={() => loadWishList(c.name, c.id)}>View Cart</button>
       </div>
     ))
+  }
+
+  function loadWishList(name: string, id: number) {
+    history.push(`/cart/${name}`)
+    dispatch(fetchWishList(id, name))
   }
 
   return (
