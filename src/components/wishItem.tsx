@@ -40,10 +40,18 @@ const WishItem: React.FC<UpdatedListItems> = (props) => {
         <p>
           Status: <span>{props.confirmed}</span>
         </p>
-        <button className="success" onClick={handleApproval}>
+        <button
+          disabled={props.confirmed === 'Confirmed'}
+          className="success"
+          onClick={handleApproval}
+        >
           Approve
         </button>
-        <button className="danger" onClick={handleDiscard}>
+        <button
+          disabled={props.confirmed === 'Discarded'}
+          className="danger"
+          onClick={handleDiscard}
+        >
           Discard
         </button>
       </div>

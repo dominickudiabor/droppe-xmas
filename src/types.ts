@@ -32,7 +32,3 @@ export interface WishListStatusConfirmation {
   status: 'Confirmed' | 'Discarded'
   name: string
 }
-
-export interface WishListUpdateStatus {
-  newItem: UpdatedListItems
-}

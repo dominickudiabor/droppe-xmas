@@ -2,7 +2,6 @@ import {
   DetailProductList,
   UpdatedListItems,
   WishListStatusConfirmation,
-  WishListUpdateStatus,
 } from 'types'
 
 export const FETCH_WISHLIST = 'FETCH_WISHLIST'
@@ -15,8 +14,8 @@ export const EXECUTE_WISHLIST_ITEM_STATUS = ' EXECUTE_WISHLIST_ITEM_STATUS'
 export interface CartState {
   products: []
   wishLists: { [name: string]: UpdatedListItems[] }
-  approved: UpdatedListItems[] | []
-  discarded: UpdatedListItems[] | []
+  approved: UpdatedListItems[]
+  discarded: UpdatedListItems[]
 }
 
 export type FetchWishList = {
@@ -41,12 +40,12 @@ export type WishlistItemStatus = {
 
 export type UpdateConfirmedWishList = {
   type: typeof UPDATE_CONFIRMED_WISHLIST
-  payload: WishListUpdateStatus
+  payload: UpdatedListItems
 }
 
 export type UpdateDiscardedWishList = {
   type: typeof UPDATE_DISCARDED_WISHLIST
-  payload: WishListUpdateStatus
+  payload: UpdatedListItems
 }
 
 export type CartActions =

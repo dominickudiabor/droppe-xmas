@@ -20,4 +20,7 @@ button {
   &.success {
     background-color: #36c51c;
   }
+  &:disabled {
+    display: none;
+  }
 }
