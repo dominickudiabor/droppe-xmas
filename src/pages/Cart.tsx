@@ -1,5 +1,3 @@
-import { Card } from 'components/card'
-import { Page } from 'components/page'
 import Spinner from 'components/spinner'
 import WishItem from 'components/wishItem'
 import { nanoid } from 'nanoid'
@@ -18,7 +16,12 @@ export const Cart: React.FC = () => {
   )
 
   function renderWishListDetails(list: UpdatedListItems[] = []) {
-    return list.map((l) => <WishItem {...l} key={nanoid()} />)
+    return list.map((l) => (
+      <div className="card" key={nanoid()}>
+        {' '}
+        <WishItem {...l} />{' '}
+      </div>
+    ))
   }
 
   if (loading) {
@@ -26,11 +29,13 @@ export const Cart: React.FC = () => {
   }
 
   return (
-    <Page>
-      <Card title={`Wishlist - ${id}`}>
-        {renderWishListDetails(userWishList)}
+    <div className="page cart">
+      <div className="header">
+        <h2>{`Wishlist for ${id}`}</h2>
         <button onClick={() => history.goBack()}>Return to CartList</button>
-      </Card>
-    </Page>
+      </div>
+
+      {renderWishListDetails(userWishList)}
+    </div>
   )
 }

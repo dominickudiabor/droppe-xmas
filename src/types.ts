@@ -35,5 +35,4 @@ export interface WishListStatusConfirmation {
 
 export interface WishListUpdateStatus {
   newItem: UpdatedListItems
-  confirmedList: UpdatedListItems[]
 }

@@ -1,5 +1,3 @@
-import { Card } from 'components/card'
-import { Page } from 'components/page'
 import { KIDS } from 'data/kids'
 import { nanoid } from 'nanoid'
 import React from 'react'
@@ -29,10 +27,14 @@ export const CartList = () => {
   }
 
   return (
-    <Page>
-      <Card title="CartList">
+    <div className="page">
+      <div className="header">
+        <h2>Xmas CartList</h2>
+      </div>
+
+      <div className="card">
         <div className="list">{renderCartList(KIDS.cartList)}</div>
-      </Card>
-    </Page>
+      </div>
+    </div>
   )
 }

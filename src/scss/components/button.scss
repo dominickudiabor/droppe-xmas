@@ -1,0 +1,23 @@
+button {
+  $button-color: #00aeff;
+  padding: 0 5%;
+  background-color: $button-color;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  word-wrap: none;
+  height: 50px;
+
+  &:hover {
+    background-color: darken($button-color, 15%);
+  }
+
+  &.danger {
+    background-color: #ff0000;
+  }
+
+  &.success {
+    background-color: #36c51c;
+  }
+}
