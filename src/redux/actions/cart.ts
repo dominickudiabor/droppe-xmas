@@ -1,8 +1,14 @@
-import { DetailProductList, WishListStatusConfirmation } from 'types'
+import {
+  DetailProductList,
+  WishListStatusConfirmation,
+  WishListUpdateStatus,
+} from 'types'
 import {
   CartActions,
   FETCH_WISHLIST,
   LOAD_UI_WITH_FETCHED_WISHLIST,
+  UPDATE_CONFIRMED_WISHLIST,
+  UPDATE_DISCARDED_WISHLIST,
   WISHLIST_ITEM_STATUS,
 } from '../types/cart.types'
 
@@ -29,6 +35,28 @@ export function wishlistItemStatus(
     type: WISHLIST_ITEM_STATUS,
     payload: {
       itemStatus,
+    },
+  }
+}
+
+export function updateConfirmedWishList(
+  updateParameters: WishListUpdateStatus
+) {
+  return {
+    type: UPDATE_CONFIRMED_WISHLIST,
+    payload: {
+      updateParameters,
+    },
+  }
+}
+
+export function updateDiscardedWishList(
+  updateParameters: WishListUpdateStatus
+) {
+  return {
+    type: UPDATE_DISCARDED_WISHLIST,
+    payload: {
+      updateParameters,
     },
   }
 }

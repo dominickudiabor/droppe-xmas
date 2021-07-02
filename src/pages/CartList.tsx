@@ -1,12 +1,12 @@
 import { Card } from 'components/card'
 import { Page } from 'components/page'
 import { KIDS } from 'data/kids'
+import { nanoid } from 'nanoid'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { fetchWishList } from 'redux/actions/cart'
 import { CartListProperties } from 'types'
-import { v4 as uuidv4 } from 'uuid'
 
 export const CartList = () => {
   const history = useHistory()
@@ -14,7 +14,7 @@ export const CartList = () => {
 
   function renderCartList(cartList: CartListProperties[]) {
     return cartList.map((c) => (
-      <div key={uuidv4()} className="list__item">
+      <div key={nanoid()} className="list__item">
         <p>
           <span>{c.name},</span> <span>{c.age}years</span>
         </p>

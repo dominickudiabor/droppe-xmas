@@ -12,7 +12,3 @@ export type UiActions = SetLoading
 export type UiState = {
   loading: boolean
 }
-
-export type AppState = {
-  ui: UiState
-}

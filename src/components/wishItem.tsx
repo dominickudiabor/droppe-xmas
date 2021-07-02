@@ -1,19 +1,31 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { wishlistItemStatus } from 'redux/actions'
+import {
+  updateConfirmedWishList,
+  updateDiscardedWishList,
+  wishlistItemStatus,
+} from 'redux/actions'
+import { AppState } from 'redux/models'
 import { UpdatedListItems } from 'types'
 
 const WishItem: React.FC<UpdatedListItems> = (props) => {
   const dispatch = useDispatch()
   const { id } = useParams<{ id: string }>()
+  const { approved, discarded } = useSelector((state: AppState) => state.cart)
 
   const handleApproval = () => {
     dispatch(wishlistItemStatus({ item: props, status: 'Confirmed', name: id }))
+    dispatch(
+      updateConfirmedWishList({ newItem: props, confirmedList: approved })
+    )
   }
 
   const handleDiscard = () => {
     dispatch(wishlistItemStatus({ item: props, status: 'Discarded', name: id }))
+    dispatch(
+      updateDiscardedWishList({ newItem: props, confirmedList: discarded })
+    )
   }
 
   return (

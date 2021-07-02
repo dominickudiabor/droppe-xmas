@@ -2,11 +2,15 @@ import {
   DetailProductList,
   UpdatedListItems,
   WishListStatusConfirmation,
+  WishListUpdateStatus,
 } from 'types'
 
 export const FETCH_WISHLIST = 'FETCH_WISHLIST'
 export const LOAD_UI_WITH_FETCHED_WISHLIST = 'LOAD_UI_WITH_FETCHED_WISHLIST'
 export const WISHLIST_ITEM_STATUS = 'WISHLIST_ITEM_STATUS,'
+export const UPDATE_CONFIRMED_WISHLIST = 'UPDATE_CONFIRMED_WISHLIST'
+export const UPDATE_DISCARDED_WISHLIST = 'UPDATE_DISCARDED_WISHLIST'
+
 export interface CartState {
   products: []
   wishLists: { [name: string]: UpdatedListItems[] }
@@ -33,7 +37,23 @@ export type WishlistItemStatus = {
   }
 }
 
+export type UpdateConfirmedWishList = {
+  type: typeof UPDATE_CONFIRMED_WISHLIST
+  payload: {
+    updateParameters: WishListUpdateStatus
+  }
+}
+
+export type UpdateDiscardedWishList = {
+  type: typeof UPDATE_DISCARDED_WISHLIST
+  payload: {
+    updateParameters: WishListUpdateStatus
+  }
+}
+
 export type CartActions =
   | FetchWishList
   | LoadUiWithFetchedWishlist
   | WishlistItemStatus
+  | UpdateDiscardedWishList
+  | UpdateConfirmedWishList
