@@ -9,6 +9,7 @@ export interface ItemDetails {
   description: string
   image: string
   category: string
+  confirmed?: 'Pending' | 'Confirmed' | 'Discarded'
 }
 export interface UpdatedListItems extends WishItems, ItemDetails {}
 export interface WishList {
@@ -24,4 +25,10 @@ export interface CartListProperties {
   id: number
   name: string
   age: number
+}
+
+export interface WishListStatusConfirmation {
+  item: UpdatedListItems
+  status: 'Confirmed' | 'Discarded'
+  name: string
 }
