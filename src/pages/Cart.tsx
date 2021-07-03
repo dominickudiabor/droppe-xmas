@@ -12,7 +12,7 @@ export const Cart: React.FC = () => {
   const history = useHistory()
   const { loading } = useSelector((state: AppState) => state.ui)
   const userWishList = useSelector(
-    (state: AppState) => state.cart.wishLists[id]
+    (state: AppState) => state.cart.wishLists[id]?.properties
   )
 
   function renderWishListDetails(list: UpdatedListItems[] = []) {
