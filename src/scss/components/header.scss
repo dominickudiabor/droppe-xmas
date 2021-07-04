@@ -5,4 +5,8 @@
   margin-bottom: 3%;
   background-color: #ffff;
   padding: 3% 0;
+
+  > h2 {
+    text-transform: capitalize;
+  }
 }

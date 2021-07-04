@@ -11,6 +11,7 @@ const Checkout = () => {
   const { approved, discarded } = useSelector((state: AppState) => state.cart)
 
   const handleNavigation = () => history.goBack()
+  const handleConfirmation = () => history.push('/confirmation')
 
   const renderTypeSpecificList = (listType: UpdatedListItems[]) => {
     return (
@@ -52,7 +53,7 @@ const Checkout = () => {
       <div className="header">
         <h2>Checkout</h2>
         <button onClick={handleNavigation}>Return to edit</button>
-        <button>Proceed to confirm</button>
+        <button onClick={handleConfirmation}>Proceed to confirm</button>
       </div>
       <div className="checkout">
         {renderCheckoutLists(['Approved', 'Discarded'])}

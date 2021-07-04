@@ -11,7 +11,7 @@ import { AppState } from 'redux/models'
 import checkoutService from 'services/checkoutService'
 import { CartListProperties, ChildSpecificProperties } from 'types'
 
-export const CartList = () => {
+const CartList = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const { wishLists } = useSelector((state: AppState) => state.cart)
@@ -67,3 +67,5 @@ export const CartList = () => {
     </div>
   )
 }
+
+export default CartList

@@ -7,7 +7,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { AppState } from 'redux/models'
 import { UpdatedListItems } from 'types'
 
-export const Cart: React.FC = () => {
+const Cart: React.FC = () => {
   const { id } = useParams<{ id: string }>()
   const history = useHistory()
   const { loading } = useSelector((state: AppState) => state.ui)
@@ -36,7 +36,9 @@ export const Cart: React.FC = () => {
         <button onClick={handleNavigation}>Return to Homepage</button>
       </div>
 
-      {renderWishListDetails(userWishList)}
+      <div className="cart__list">{renderWishListDetails(userWishList)}</div>
     </div>
   )
 }
+
+export default Cart

@@ -25,7 +25,7 @@ export const CheckoutItem: React.FC<CheckoutItemProps> = ({
         <h4>{title}</h4>
         <div className="checkout-item__details">
           <p>
-            Price:<span>{price} </span>
+            Price:<span>€{price} </span>
           </p>
           <p>
             Quantity:<span>{quantity} </span>
