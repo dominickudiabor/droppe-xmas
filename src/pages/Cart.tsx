@@ -15,7 +15,7 @@ export const Cart: React.FC = () => {
     (state: AppState) => state.cart.wishLists[id]?.properties
   )
 
-  function renderWishListDetails(list: UpdatedListItems[] = []) {
+  const renderWishListDetails = (list: UpdatedListItems[] = []) => {
     return list.map((l) => (
       <div className="card" key={nanoid()}>
         {' '}
@@ -23,6 +23,7 @@ export const Cart: React.FC = () => {
       </div>
     ))
   }
+  const handleNavigation = () => history.push('/')
 
   if (loading) {
     return <Spinner />
@@ -32,7 +33,7 @@ export const Cart: React.FC = () => {
     <div className="page cart">
       <div className="header">
         <h2>{`Wishlist for ${id}`}</h2>
-        <button onClick={() => history.goBack()}>Return to CartList</button>
+        <button onClick={handleNavigation}>Return to Homepage</button>
       </div>
 
       {renderWishListDetails(userWishList)}

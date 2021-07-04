@@ -17,7 +17,7 @@ export const CartList = () => {
   const { wishLists } = useSelector((state: AppState) => state.cart)
   const defaultChildlist = KIDS.cartList
 
-  function renderCartList(cartList: CartListProperties[]) {
+  const renderCartList = (cartList: CartListProperties[]) => {
     return cartList.map((c) => (
       <div key={nanoid()} className="list__item">
         <p>

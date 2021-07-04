@@ -8,6 +8,7 @@ button {
   cursor: pointer;
   word-wrap: none;
   height: 50px;
+  font-weight: 600;
 
   &:hover {
     background-color: darken($button-color, 15%);

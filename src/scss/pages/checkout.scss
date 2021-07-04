@@ -1,0 +1,23 @@
+.checkout {
+  display: flex;
+  padding: 0 2%;
+
+  .card {
+    margin: 3% 2%;
+
+    &__items {
+      :last-child {
+        border-bottom: none;
+      }
+    }
+
+    &__error,
+    h2 {
+      text-align: center;
+      color: #0c88cf;
+    }
+  }
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+}
