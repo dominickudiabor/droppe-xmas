@@ -62,6 +62,6 @@ export function cart(
     }
   }
   default:
-    return { ...state }
+    return state
   }
 }

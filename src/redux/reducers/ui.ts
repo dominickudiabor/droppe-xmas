@@ -11,6 +11,6 @@ export function ui(state: UiState = defaultState, action: UiActions): UiState {
     return { ...state, loading: action.payload.isLoading }
 
   default:
-    return { ...state }
+    return state
   }
 }
