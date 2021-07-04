@@ -1,8 +1,9 @@
 import { applyMiddleware, compose, createStore } from 'redux'
+import { persistStore } from 'redux-persist'
 import createSagaMiddleware from 'redux-saga'
 import thunk from 'redux-thunk'
 import { AppState } from './models'
-import createRootReducer from './reducers'
+import rootReducer from './reducers'
 import rootSaga from './sagas'
 
 const initState: AppState = {
@@ -27,11 +28,13 @@ export default function makeStore(initialState = initState) {
     }
   }
 
-  const store = createStore(
-    createRootReducer(),
+  const store: any = createStore(
+    rootReducer,
     initialState,
     composeEnhancers(applyMiddleware(...middlewares))
   )
+
+  const persistor = persistStore(store)
 
   sagaMiddleware.run(rootSaga)
 
@@ -42,5 +45,5 @@ export default function makeStore(initialState = initState) {
     })
   }
 
-  return store
+  return { store, persistor }
 }

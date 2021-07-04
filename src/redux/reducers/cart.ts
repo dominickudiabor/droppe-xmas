@@ -1,6 +1,6 @@
+import { CartState } from 'redux/models'
 import {
   CartActions,
-  CartState,
   LOAD_UI_WITH_FETCHED_WISHLIST,
   UPDATE_APPROVAL_AND_DISCARDED_LIST,
   UPDATE_WISHLIST_ITEM_APPROVAL_STATUS,

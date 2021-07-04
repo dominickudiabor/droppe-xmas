@@ -1,3 +1,10 @@
+export interface ChildSpecificProperties {
+  [name: string]: {
+    properties: UpdatedListItems[]
+    approved: UpdatedListItems[]
+    discarded: UpdatedListItems[]
+  }
+}
 export interface WishItems {
   productId: number
   quantity: number

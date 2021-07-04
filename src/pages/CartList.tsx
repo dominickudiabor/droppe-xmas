@@ -8,9 +8,8 @@ import {
   updateApprovalAndDiscardedList,
 } from 'redux/actions/cart'
 import { AppState } from 'redux/models'
-import { ChildSpecificProperties } from 'redux/types/cart.types'
 import checkoutService from 'services/checkoutService'
-import { CartListProperties } from 'types'
+import { CartListProperties, ChildSpecificProperties } from 'types'
 
 export const CartList = () => {
   const history = useHistory()

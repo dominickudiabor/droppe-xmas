@@ -8,7 +8,3 @@ export type SetLoading = {
 }
 
 export type UiActions = SetLoading
-
-export type UiState = {
-  loading: boolean
-}

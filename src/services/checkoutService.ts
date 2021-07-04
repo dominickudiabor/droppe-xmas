@@ -1,5 +1,4 @@
-import { ChildSpecificProperties } from 'redux/types/cart.types'
-import { UpdatedListItems } from 'types'
+import { ChildSpecificProperties, UpdatedListItems } from 'types'
 
 export default {
   createAggregatedList: async (wishlist: ChildSpecificProperties) => {

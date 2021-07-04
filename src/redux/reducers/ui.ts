@@ -1,4 +1,5 @@
-import { UiActions, UiState } from '../types/ui.types'
+import { UiState } from 'redux/models'
+import { UiActions } from '../types/ui.types'
 
 const defaultState: UiState = {
   loading: false,
