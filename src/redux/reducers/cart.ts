@@ -2,11 +2,11 @@ import {
   CartActions,
   CartState,
   LOAD_UI_WITH_FETCHED_WISHLIST,
-  WISHLIST_ITEM_STATUS,
+  UPDATE_APPROVAL_AND_DISCARDED_LIST,
+  UPDATE_WISHLIST_ITEM_APPROVAL_STATUS,
 } from 'redux/types/cart.types'
 
 const defaultState: CartState = {
-  products: [],
   wishLists: {},
   approved: [],
   discarded: [],
@@ -27,7 +27,7 @@ export function cart(
       },
     }
   }
-  case WISHLIST_ITEM_STATUS: {
+  case UPDATE_WISHLIST_ITEM_APPROVAL_STATUS: {
     const { item, status, name } = action.payload
     const childSpecificList = state.wishLists[name].properties
     const itemToUpdate = childSpecificList.findIndex((a) => a.id === item.id)
@@ -50,12 +50,15 @@ export function cart(
           discarded: [...updatedDiscardedItems],
         },
       },
-      // approved: [
-      //   ...state.wishLists[name].filter((a) => a.confirmed === 'Confirmed'),
-      // ],
-      // discarded: [
-      //   ...state.wishLists[name].filter((a) => a.confirmed === 'Discarded'),
-      // ],
+    }
+  }
+
+  case UPDATE_APPROVAL_AND_DISCARDED_LIST: {
+    const { updatedApprovedList, updatedRejectedList } = action.payload
+    return {
+      ...state,
+      approved: updatedApprovedList,
+      discarded: updatedRejectedList,
     }
   }
   default:

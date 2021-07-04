@@ -39,3 +39,8 @@ export interface UpdateCredentials {
   item: UpdatedListItems
   name: string
 }
+
+export interface ApprovalAndDiscardedList {
+  updatedApprovedList: UpdatedListItems[]
+  updatedRejectedList: UpdatedListItems[]
+}

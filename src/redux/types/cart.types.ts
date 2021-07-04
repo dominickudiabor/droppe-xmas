@@ -1,28 +1,31 @@
 import {
+  ApprovalAndDiscardedList,
   DetailProductList,
-  UpdateCredentials,
   UpdatedListItems,
   WishListStatusConfirmation,
 } from 'types'
 
 export const FETCH_WISHLIST = 'FETCH_WISHLIST'
 export const LOAD_UI_WITH_FETCHED_WISHLIST = 'LOAD_UI_WITH_FETCHED_WISHLIST'
-export const WISHLIST_ITEM_STATUS = 'WISHLIST_ITEM_STATUS,'
+export const UPDATE_WISHLIST_ITEM_APPROVAL_STATUS =
+  'UPDATE_WISHLIST_ITEM_APPROVAL_STATUS,'
 export const UPDATE_CONFIRMED_WISHLIST = 'UPDATE_CONFIRMED_WISHLIST'
 export const UPDATE_DISCARDED_WISHLIST = 'UPDATE_DISCARDED_WISHLIST'
 export const EXECUTE_WISHLIST_ITEM_STATUS = ' EXECUTE_WISHLIST_ITEM_STATUS'
+export const UPDATE_APPROVAL_AND_DISCARDED_LIST =
+  'UPDATE_APPROVAL_AND_DISCARDED_LIST'
 
 export interface CartState {
-  products: []
-  wishLists: {
-    [name: string]: {
-      properties: UpdatedListItems[]
-      approved: UpdatedListItems[]
-      discarded: UpdatedListItems[]
-    }
-  }
+  wishLists: ChildSpecificProperties
   approved: UpdatedListItems[]
   discarded: UpdatedListItems[]
+}
+export interface ChildSpecificProperties {
+  [name: string]: {
+    properties: UpdatedListItems[]
+    approved: UpdatedListItems[]
+    discarded: UpdatedListItems[]
+  }
 }
 
 export type FetchWishList = {
@@ -41,24 +44,18 @@ export type ExecuteWishListItemStatus = {
 }
 
 export type WishlistItemStatus = {
-  type: typeof WISHLIST_ITEM_STATUS
+  type: typeof UPDATE_WISHLIST_ITEM_APPROVAL_STATUS
   payload: WishListStatusConfirmation
 }
 
-export type UpdateConfirmedWishList = {
-  type: typeof UPDATE_CONFIRMED_WISHLIST
-  payload: UpdateCredentials
-}
-
-export type UpdateDiscardedWishList = {
-  type: typeof UPDATE_DISCARDED_WISHLIST
-  payload: UpdateCredentials
+export type UpdateApprovalAndDiscardedList = {
+  type: typeof UPDATE_APPROVAL_AND_DISCARDED_LIST
+  payload: ApprovalAndDiscardedList
 }
 
 export type CartActions =
   | FetchWishList
   | LoadUiWithFetchedWishlist
   | WishlistItemStatus
-  | UpdateDiscardedWishList
-  | UpdateConfirmedWishList
   | ExecuteWishListItemStatus
+  | UpdateApprovalAndDiscardedList

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { wishlistItemStatus } from 'redux/actions'
+import { updateWishlistItemApprovalStatus } from 'redux/actions'
 import { UpdatedListItems } from 'types'
 
 const WishItem: React.FC<UpdatedListItems> = (props) => {
@@ -9,11 +9,23 @@ const WishItem: React.FC<UpdatedListItems> = (props) => {
   const { id } = useParams<{ id: string }>()
 
   const handleApproval = () => {
-    dispatch(wishlistItemStatus({ item: props, status: 'Confirmed', name: id }))
+    dispatch(
+      updateWishlistItemApprovalStatus({
+        item: props,
+        status: 'Confirmed',
+        name: id,
+      })
+    )
   }
 
   const handleDiscard = () => {
-    dispatch(wishlistItemStatus({ item: props, status: 'Discarded', name: id }))
+    dispatch(
+      updateWishlistItemApprovalStatus({
+        item: props,
+        status: 'Discarded',
+        name: id,
+      })
+    )
   }
 
   return (

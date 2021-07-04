@@ -10,7 +10,6 @@ const initState: AppState = {
     loading: false,
   },
   cart: {
-    products: [],
     wishLists: {},
     approved: [],
     discarded: [],

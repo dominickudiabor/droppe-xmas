@@ -1,10 +1,15 @@
-import { DetailProductList, WishListStatusConfirmation } from 'types'
+import {
+  ApprovalAndDiscardedList,
+  DetailProductList,
+  WishListStatusConfirmation,
+} from 'types'
 import {
   CartActions,
   EXECUTE_WISHLIST_ITEM_STATUS,
   FETCH_WISHLIST,
   LOAD_UI_WITH_FETCHED_WISHLIST,
-  WISHLIST_ITEM_STATUS,
+  UPDATE_APPROVAL_AND_DISCARDED_LIST,
+  UPDATE_WISHLIST_ITEM_APPROVAL_STATUS,
 } from '../types/cart.types'
 
 export function fetchWishList(id: number, name: string): CartActions {
@@ -32,11 +37,20 @@ export function executeWishListItemStatus(
   }
 }
 
-export function wishlistItemStatus(
+export function updateWishlistItemApprovalStatus(
   itemStatus: WishListStatusConfirmation
 ): CartActions {
   return {
-    type: WISHLIST_ITEM_STATUS,
+    type: UPDATE_WISHLIST_ITEM_APPROVAL_STATUS,
     payload: itemStatus,
+  }
+}
+
+export function updateApprovalAndDiscardedList(
+  updatedList: ApprovalAndDiscardedList
+): CartActions {
+  return {
+    type: UPDATE_APPROVAL_AND_DISCARDED_LIST,
+    payload: updatedList,
   }
 }
