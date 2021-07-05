@@ -55,3 +55,9 @@ export interface UpdatedCartFromApi {
   date: string
   products: WishItems[]
 }
+
+export interface TargetChildProperties {
+  id: number
+  name: string
+  age: number
+}

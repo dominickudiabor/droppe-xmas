@@ -3,7 +3,7 @@ import Spinner from 'components/spinner'
 import Cart from 'pages/Cart'
 import CartList from 'pages/CartList'
 import Checkout from 'pages/Checkout'
-import Confirmation from 'pages/Confirmation'
+import Summary from 'pages/Summary'
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
@@ -24,7 +24,7 @@ export default function App() {
     <Switch>
       <Route exact path="/" component={CartList} />
       <Route exact path="/checkout" component={Checkout} />
-      <Route exact path="/confirmation" component={Confirmation} />
+      <Route exact path="/summary" component={Summary} />
       <Route path="/cart/:id" component={Cart} />
     </Switch>
   )

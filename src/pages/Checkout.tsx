@@ -28,7 +28,7 @@ const Checkout = () => {
   const handleNavigation = () => history.goBack()
   const handleConfirmation = () => {
     dispatch(pushApprovesListToApi(wishLists))
-    history.push('/confirmation')
+    history.push('/summary')
   }
 
   const renderTypeSpecificList = (listType: UpdatedListItems[]) => {
