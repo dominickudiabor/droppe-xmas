@@ -1,4 +1,3 @@
-import Spinner from 'components/spinner'
 import WishItem from 'components/wishItem'
 import { nanoid } from 'nanoid'
 import React from 'react'
@@ -10,7 +9,7 @@ import { UpdatedListItems } from 'types'
 const Cart: React.FC = () => {
   const { id } = useParams<{ id: string }>()
   const history = useHistory()
-  const { loading } = useSelector((state: AppState) => state.ui)
+
   const userWishList = useSelector(
     (state: AppState) => state.cart.wishLists[id]?.properties
   )
@@ -24,10 +23,6 @@ const Cart: React.FC = () => {
     ))
   }
   const handleNavigation = () => history.push('/')
-
-  if (loading) {
-    return <Spinner />
-  }
 
   return (
     <div className="page cart">

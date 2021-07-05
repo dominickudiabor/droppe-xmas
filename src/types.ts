@@ -18,10 +18,7 @@ export interface ItemDetails {
   category: string
   confirmed?: 'Pending' | 'Confirmed' | 'Discarded'
 }
-export interface UpdatedListItems extends WishItems, ItemDetails {
-  approved?: UpdatedListItems[]
-  discarded?: UpdatedListItems[]
-}
+export interface UpdatedListItems extends WishItems, ItemDetails {}
 export interface WishList {
   products: WishItems[]
 }
@@ -50,4 +47,11 @@ export interface UpdateCredentials {
 export interface ApprovalAndDiscardedList {
   updatedApprovedList: UpdatedListItems[]
   updatedRejectedList: UpdatedListItems[]
+}
+
+export interface UpdatedCartFromApi {
+  id: number
+  userId: number
+  date: string
+  products: WishItems[]
 }

@@ -1,17 +1,35 @@
 import { CheckoutItem } from 'components/checkoutItem'
 import { nanoid } from 'nanoid'
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { pushApprovesListToApi } from 'redux/actions'
 import { AppState } from 'redux/models'
+import checkoutService from 'services/checkoutService'
 import { UpdatedListItems } from 'types'
 
 const Checkout = () => {
+  const [total, setTotal] = useState(0)
   const history = useHistory()
-  const { approved, discarded } = useSelector((state: AppState) => state.cart)
+  const dispatch = useDispatch()
+
+  const { approved, discarded, wishLists } = useSelector(
+    (state: AppState) => state.cart
+  )
+
+  useEffect(() => {
+    async function loadTotal() {
+      const grandTotal = await checkoutService.computeTotalOnListItems(approved)
+      setTotal(grandTotal)
+    }
+    loadTotal()
+  }, [approved])
 
   const handleNavigation = () => history.goBack()
-  const handleConfirmation = () => history.push('/confirmation')
+  const handleConfirmation = () => {
+    dispatch(pushApprovesListToApi(wishLists))
+    history.push('/confirmation')
+  }
 
   const renderTypeSpecificList = (listType: UpdatedListItems[]) => {
     return (
@@ -44,6 +62,15 @@ const Checkout = () => {
         ) : (
           <p className="checkout__error">Error lists not found</p>
         )}
+
+        {l === 'Approved' && (
+          <div className="checkout__base">
+            <p>
+              GrandTotal: <span>€{total}</span>
+            </p>
+            <button onClick={handleConfirmation}>Proceed to confirm</button>
+          </div>
+        )}
       </div>
     ))
   }
@@ -53,7 +80,6 @@ const Checkout = () => {
       <div className="header">
         <h2>Checkout</h2>
         <button onClick={handleNavigation}>Return to edit</button>
-        <button onClick={handleConfirmation}>Proceed to confirm</button>
       </div>
       <div className="checkout">
         {renderCheckoutLists(['Approved', 'Discarded'])}

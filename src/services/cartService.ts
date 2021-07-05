@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { UpdatedListItems, WishItems } from 'types'
+import moment from 'moment'
+import { ChildSpecificProperties, UpdatedListItems, WishItems } from 'types'
 
 export default {
   fetchListPerChild: async (id: number) => {
@@ -22,5 +23,25 @@ export default {
     } catch (error) {
       return
     }
+  },
+  pushConfirmedListsToApi: async (list: ChildSpecificProperties) => {
+    let combinedResponse: {}[] = []
+    try {
+      for (const key in list) {
+        const combinedList = [...list[key].approved, ...list[key].discarded]
+
+        for (const key of combinedList) {
+          const response = await axios.post('/carts', {
+            userId: key.id,
+            date: moment().format('YYYY-MM-DD'),
+            products: combinedList,
+          })
+          console.log(combinedResponse)
+          await combinedResponse.push({ ...response.data })
+        }
+      }
+
+      return combinedResponse
+    } catch (error) {}
   },
 }

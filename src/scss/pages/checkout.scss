@@ -4,6 +4,7 @@
 
   .card {
     margin: 3% 2%;
+    height: 100%;
 
     &__items {
       :last-child {
@@ -12,10 +13,27 @@
     }
 
     &__error,
-    h2 {
+    h2,
+    h3 {
       text-align: center;
       color: #0c88cf;
       margin: 5% 0;
+    }
+
+    .checkout__base {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      width: 50%;
+      margin: 0 auto;
+      margin-top: 2%;
+      margin-bottom: 3%;
+
+      p > span {
+        font-weight: 700;
+        font-size: larger;
+      }
     }
   }
   @media only screen and (max-width: 600px) {

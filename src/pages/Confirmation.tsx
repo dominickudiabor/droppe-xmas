@@ -11,6 +11,11 @@ const Confirmation = () => {
         <h2>{'Confirmation'}</h2>
         <button onClick={handleNavigation}>Return to Homepage</button>
       </div>
+      <div className="confirmation">
+        <p>
+          Thank you for using our service, your order details are found below.
+        </p>
+      </div>
     </div>
   )
 }

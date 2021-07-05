@@ -1,6 +1,11 @@
-import { call, put, takeEvery } from 'redux-saga/effects'
+import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
 import { loadUiWithFetchedWishList, setLoading } from 'redux/actions'
-import { FetchWishList, FETCH_WISHLIST } from 'redux/types/cart.types'
+import {
+  FetchWishList,
+  FETCH_WISHLIST,
+  PushApproveListToApi,
+  PUSH_APPROVAL_LIST_TO_API,
+} from 'redux/types/cart.types'
 import cartService from 'services/cartService'
 import { UpdatedListItems, WishList } from 'types'
 
@@ -20,4 +25,21 @@ export function* onfetchWishListAndUpdateUi({
   } catch (error) {}
 }
 
-export default [takeEvery(FETCH_WISHLIST, onfetchWishListAndUpdateUi)]
+export function* onPushApprovedListToApi({
+  payload: { list },
+}: PushApproveListToApi) {
+  try {
+    yield put(setLoading(true))
+    const wishList: WishList = yield call(
+      cartService.pushConfirmedListsToApi,
+      list
+    )
+    console.log('sagas', wishList)
+    yield put(setLoading(false))
+  } catch (error) {}
+}
+
+export default [
+  takeEvery(FETCH_WISHLIST, onfetchWishListAndUpdateUi),
+  takeLatest(PUSH_APPROVAL_LIST_TO_API, onPushApprovedListToApi),
+]
