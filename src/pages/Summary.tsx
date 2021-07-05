@@ -5,17 +5,25 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { AppState } from 'redux/models'
-import { TargetChildProperties, UpdatedListItems } from 'types'
+import { CartTotal, TargetChildProperties, UpdatedListItems } from 'types'
 
 const Summary = () => {
   const history = useHistory()
-  const { wishLists } = useSelector((state: AppState) => state.cart)
+  const { wishLists, total } = useSelector((state: AppState) => state.cart)
+  const totalApprove = total['approved']
+  const totalDiscarded = total['discarded']
+
+  const cartTotalforWishlists = [totalApprove, totalDiscarded]
 
   const handleNavigation = () => history.push('/')
 
   const renderchildApprovalListDetails = (list: UpdatedListItems[]) => {
     if (list.length < 1) return <p>None</p>
-    return list.map((l) => <p key={nanoid()}>{l.title}</p>)
+    return list.map((l) => (
+      <div key={nanoid()}>
+        <p key={nanoid()}>{l.title}</p>
+      </div>
+    ))
   }
 
   const renderChildApprovedList = (kids: TargetChildProperties[]) => {
@@ -26,6 +34,28 @@ const Summary = () => {
         {renderchildApprovalListDetails(wishLists[k.name].approved)}
         <h5>Discarded</h5>
         {renderchildApprovalListDetails(wishLists[k.name].discarded)}
+      </div>
+    ))
+  }
+
+  const renderTotalCartListDetails = (cartTotal: CartTotal[]) => {
+    return cartTotal.map((c) => (
+      <div className="confirmation__content--total">
+        <h3>{`Order total for ${c.type} list`}</h3>
+        <div className="confirmation__content--total--detail">
+          <p>
+            <span>Subtotal </span>
+            <span>€{c.before}</span>
+          </p>
+          <p>
+            <span>Discount</span>
+            <span> - €{c.before - c.after}</span>
+          </p>
+          <p>
+            <span>Total after discount</span>
+            <span>€{c.after}</span>
+          </p>
+        </div>
       </div>
     ))
   }
@@ -50,6 +80,7 @@ const Summary = () => {
         </div>
         <div className="confirmation__content">
           {renderChildApprovedList(KIDS.cartList)}
+          {renderTotalCartListDetails(cartTotalforWishlists)}
         </div>
       </div>
     </div>

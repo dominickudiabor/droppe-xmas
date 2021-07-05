@@ -70,8 +70,8 @@ export function cart(
       ...state,
       total: {
         ...state.total,
-        'approved': approved,
-        'discarded': discarded,
+        approved: approved,
+        discarded: discarded,
       },
     }
   }

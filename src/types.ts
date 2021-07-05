@@ -65,6 +65,7 @@ export interface TargetChildProperties {
 export interface CartTotal {
   before: number
   after: number
+  type: 'approved' | 'discarded'
 }
 
 export interface CombinedCartTotals {

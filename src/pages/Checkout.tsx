@@ -40,8 +40,8 @@ const Checkout = () => {
   const handleConfirmation = () => {
     dispatch(
       updateCombinedCartTotal({
-        approved: approvedTotal,
-        discarded: discardedTotal,
+        approved: { ...approvedTotal, type: 'approved' },
+        discarded: { ...discardedTotal, type: 'discarded' },
       })
     )
     dispatch(pushApprovesListToApi(wishLists))
