@@ -1,7 +1,7 @@
 button {
-  $button-color: #00aeff;
+  $button-color: var(--button-color-primary);
   padding: 0 5%;
-  background-color: $button-color;
+  background-color: var(--button-color-primary);
   color: white;
   border: none;
   border-radius: 5px;
@@ -11,15 +11,15 @@ button {
   font-weight: 600;
 
   &:hover {
-    background-color: darken($button-color, 15%);
+    background-color: darken(#00aeff, 15%);
   }
 
   &.danger {
-    background-color: #ff0000;
+    background-color: var(--button-color-success);
   }
 
   &.success {
-    background-color: #36c51c;
+    background-color: var(--button-color-danger);
   }
   &:disabled {
     display: none;

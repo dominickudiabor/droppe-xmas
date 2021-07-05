@@ -5,10 +5,10 @@
     line-height: 2rem;
 
     &.title {
-      background-color: #ffd900;
+      background-color: var(--background-color-03);
     }
     &.subtitle {
-      background-color: #fff;
+      background-color: var(--color-white);
     }
   }
 
@@ -16,20 +16,20 @@
     margin: 2% auto;
     padding: 5%;
     width: 70%;
-    background-color: #fff;
+    background-color: var(--color-white);
 
     &-item {
-      border-top: 1px solid #000;
+      border-top: 1px solid var(--color-black);
 
       h4 {
         text-align: center;
       }
       h5:first-of-type {
-        color: #36c51c;
+        color: var(--button-color-success);
       }
 
       h5 {
-        color: #ff0000;
+        color: var(--button-color-danger);
       }
     }
   }
