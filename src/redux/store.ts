@@ -14,6 +14,7 @@ const initState: AppState = {
     wishLists: {},
     approved: [],
     discarded: [],
+    total: {},
   },
 }
 

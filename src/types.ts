@@ -61,3 +61,12 @@ export interface TargetChildProperties {
   name: string
   age: number
 }
+
+export interface CartTotal {
+  before: number
+  after: number
+}
+
+export interface CombinedCartTotals {
+  [name: string]: CartTotal
+}

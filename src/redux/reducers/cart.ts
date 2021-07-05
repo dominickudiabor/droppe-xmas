@@ -3,6 +3,7 @@ import {
   CartActions,
   LOAD_UI_WITH_FETCHED_WISHLIST,
   UPDATE_APPROVAL_AND_DISCARDED_LIST,
+  UPDATE_COMBINED_CART_TOTAL,
   UPDATE_WISHLIST_ITEM_APPROVAL_STATUS,
 } from 'redux/types/cart.types'
 
@@ -10,6 +11,7 @@ const defaultState: CartState = {
   wishLists: {},
   approved: [],
   discarded: [],
+  total: {},
 }
 
 export function cart(
@@ -59,6 +61,18 @@ export function cart(
       ...state,
       approved: updatedApprovedList,
       discarded: updatedRejectedList,
+    }
+  }
+
+  case UPDATE_COMBINED_CART_TOTAL: {
+    const { approved, discarded } = action.payload.total
+    return {
+      ...state,
+      total: {
+        ...state.total,
+        'approved': approved,
+        'discarded': discarded,
+      },
     }
   }
   default:

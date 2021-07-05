@@ -3,13 +3,14 @@ import { nanoid } from 'nanoid'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { pushApprovesListToApi } from 'redux/actions'
+import { pushApprovesListToApi, updateCombinedCartTotal } from 'redux/actions'
 import { AppState } from 'redux/models'
 import checkoutService from 'services/checkoutService'
 import { UpdatedListItems } from 'types'
 
 const Checkout = () => {
-  const [total, setTotal] = useState(0)
+  const [approvedTotal, setApprovedTotal] = useState({ before: 0, after: 0 })
+  const [discardedTotal, setDiscardedTotal] = useState({ before: 0, after: 0 })
   const history = useHistory()
   const dispatch = useDispatch()
 
@@ -18,15 +19,31 @@ const Checkout = () => {
   )
 
   useEffect(() => {
-    async function loadTotal() {
-      const grandTotal = await checkoutService.computeTotalOnListItems(approved)
-      setTotal(grandTotal)
+    async function loadTotal(
+      list: UpdatedListItems[],
+      setTotal: {
+        (value: React.SetStateAction<{ before: number; after: number }>): void
+        (value: React.SetStateAction<{ before: number; after: number }>): void
+        (arg0: { before: number; after: number }): void
+      }
+    ) {
+      const { before, after } = await checkoutService.computeTotalOnListItems(
+        list
+      )
+      setTotal({ before, after })
     }
-    loadTotal()
-  }, [approved])
+    loadTotal(approved, setApprovedTotal)
+    loadTotal(discarded, setDiscardedTotal)
+  }, [approved, discarded])
 
   const handleNavigation = () => history.goBack()
   const handleConfirmation = () => {
+    dispatch(
+      updateCombinedCartTotal({
+        approved: approvedTotal,
+        discarded: discardedTotal,
+      })
+    )
     dispatch(pushApprovesListToApi(wishLists))
     history.push('/summary')
   }
@@ -62,15 +79,23 @@ const Checkout = () => {
         ) : (
           <p className="checkout__error">Error lists not found</p>
         )}
-
-        {l === 'Approved' && (
-          <div className="checkout__base">
-            <p>
-              GrandTotal: <span>€{total}</span>
-            </p>
-            <button onClick={handleConfirmation}>Proceed to confirm</button>
-          </div>
-        )}
+        <div className="checkout__base">
+          <p>
+            Price before Discount:
+            <span>
+              €{l === 'Approved' ? approvedTotal.before : discardedTotal.before}
+            </span>
+          </p>
+          <p>
+            Price after Discount:{' '}
+            <span>
+              €{l === 'Approved' ? approvedTotal.after : discardedTotal.after}
+            </span>
+          </p>
+          {l === 'Approved' && (
+            <button onClick={handleConfirmation}>Confirm List</button>
+          )}
+        </div>
       </div>
     ))
   }

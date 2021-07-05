@@ -15,11 +15,11 @@ button {
   }
 
   &.danger {
-    background-color: var(--button-color-success);
+    background-color: var(--button-color-danger);
   }
 
   &.success {
-    background-color: var(--button-color-danger);
+    background-color: var(--button-color-success);
   }
   &:disabled {
     display: none;

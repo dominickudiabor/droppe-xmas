@@ -1,6 +1,7 @@
 import {
   ApprovalAndDiscardedList,
   ChildSpecificProperties,
+  CombinedCartTotals,
   DetailProductList,
   WishListStatusConfirmation,
 } from 'types'
@@ -11,6 +12,7 @@ import {
   LOAD_UI_WITH_FETCHED_WISHLIST,
   PUSH_APPROVAL_LIST_TO_API,
   UPDATE_APPROVAL_AND_DISCARDED_LIST,
+  UPDATE_COMBINED_CART_TOTAL,
   UPDATE_WISHLIST_ITEM_APPROVAL_STATUS,
 } from '../types/cart.types'
 
@@ -63,5 +65,14 @@ export function pushApprovesListToApi(
   return {
     type: PUSH_APPROVAL_LIST_TO_API,
     payload: { list: wishLists },
+  }
+}
+
+export function updateCombinedCartTotal(
+  cartTotal: CombinedCartTotals
+): CartActions {
+  return {
+    type: UPDATE_COMBINED_CART_TOTAL,
+    payload: { total: cartTotal },
   }
 }

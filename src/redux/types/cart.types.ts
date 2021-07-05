@@ -1,4 +1,8 @@
-import { ChildSpecificProperties, UpdatedListItems } from 'types'
+import {
+  ChildSpecificProperties,
+  CombinedCartTotals,
+  UpdatedListItems,
+} from 'types'
 
 export const FETCH_WISHLIST = 'FETCH_WISHLIST'
 export const LOAD_UI_WITH_FETCHED_WISHLIST = 'LOAD_UI_WITH_FETCHED_WISHLIST'
@@ -8,6 +12,7 @@ export const EXECUTE_WISHLIST_ITEM_STATUS = ' EXECUTE_WISHLIST_ITEM_STATUS'
 export const UPDATE_APPROVAL_AND_DISCARDED_LIST =
   'UPDATE_APPROVAL_AND_DISCARDED_LIST'
 export const PUSH_APPROVAL_LIST_TO_API = 'PUSH_APPROVAL_LIST_TO_API'
+export const UPDATE_COMBINED_CART_TOTAL = 'UPDATE_COMBINED_CART_TOTAL'
 
 export type FetchWishList = {
   type: typeof FETCH_WISHLIST
@@ -55,6 +60,13 @@ export type PushApproveListToApi = {
   }
 }
 
+export type UpdateCombinedCartTotal = {
+  type: typeof UPDATE_COMBINED_CART_TOTAL
+  payload: {
+    total: CombinedCartTotals
+  }
+}
+
 export type CartActions =
   | FetchWishList
   | LoadUiWithFetchedWishlist
@@ -62,3 +74,4 @@ export type CartActions =
   | ExecuteWishListItemStatus
   | UpdateApprovalAndDiscardedList
   | PushApproveListToApi
+  | UpdateCombinedCartTotal

@@ -1,4 +1,8 @@
-import { ChildSpecificProperties, UpdatedListItems } from 'types'
+import {
+  ChildSpecificProperties,
+  CombinedCartTotals,
+  UpdatedListItems,
+} from 'types'
 
 export type AppState = {
   ui: UiState
@@ -13,4 +17,5 @@ export interface CartState {
   wishLists: ChildSpecificProperties
   approved: UpdatedListItems[]
   discarded: UpdatedListItems[]
+  total: CombinedCartTotals
 }

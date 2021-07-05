@@ -40,14 +40,29 @@ export default {
     return { updatedApprovedList, updatedRejectedList }
   },
   computeTotalOnListItems: async (list: UpdatedListItems[]) => {
-    let compute = (a: UpdatedListItems) => {
+    const computeDiscount = (a: UpdatedListItems) => {
       const result = a.price * a.quantity * (1 - (a.quantity * 10) / 100)
       return parseInt(result.toFixed(2))
     }
-    const newTotal = list.reduce((acc, curr) => {
+
+    const computeTotal = (a: UpdatedListItems) => {
+      const result = a.price * a.quantity
+      return parseInt(result.toFixed(2))
+    }
+
+    const discountTotal: number = list.reduce((acc, curr) => {
       if (curr.quantity === 1) return acc + curr.price
-      return acc + compute(curr)
+      return acc + computeDiscount(curr)
     }, 0)
-    return newTotal
+
+    const withoutDiscount: number = list.reduce((acc, curr) => {
+      if (curr.quantity === 1) return acc + curr.price
+      return acc + computeTotal(curr)
+    }, 0)
+
+    return {
+      before: +withoutDiscount.toFixed(2),
+      after: +discountTotal.toFixed(2),
+    }
   },
 }

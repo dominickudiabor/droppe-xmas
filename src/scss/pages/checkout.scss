@@ -6,12 +6,6 @@
     margin: 3% 2%;
     height: 100%;
 
-    &__items {
-      :last-child {
-        border-bottom: none;
-      }
-    }
-
     &__error,
     h2,
     h3 {
@@ -33,6 +27,7 @@
       p > span {
         font-weight: 700;
         font-size: larger;
+        margin-left: 3%;
       }
     }
   }
