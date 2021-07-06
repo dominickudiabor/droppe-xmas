@@ -32,26 +32,32 @@ export type LoadUiWithFetchedWishlist = {
 export type ExecuteWishListItemStatus = {
   type: typeof EXECUTE_WISHLIST_ITEM_STATUS
   payload: {
-    item: UpdatedListItems
-    status: 'Confirmed' | 'Discarded'
-    name: string
+    status: {
+      item: UpdatedListItems
+      status: 'Confirmed' | 'Discarded'
+      name: string
+    }
   }
 }
 
 export type WishlistItemStatus = {
   type: typeof UPDATE_WISHLIST_ITEM_APPROVAL_STATUS
   payload: {
-    item: UpdatedListItems
-    status: 'Confirmed' | 'Discarded'
-    name: string
+    status: {
+      item: UpdatedListItems
+      status: 'Confirmed' | 'Discarded'
+      name: string
+    }
   }
 }
 
 export type UpdateApprovalAndDiscardedList = {
   type: typeof UPDATE_APPROVAL_AND_DISCARDED_LIST
   payload: {
-    updatedApprovedList: UpdatedListItems[]
-    updatedRejectedList: UpdatedListItems[]
+    updated: {
+      updatedApprovedList: UpdatedListItems[]
+      updatedRejectedList: UpdatedListItems[]
+    }
   }
 }
 

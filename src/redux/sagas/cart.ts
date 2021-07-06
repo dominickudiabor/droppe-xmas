@@ -30,11 +30,7 @@ export function* onPushApprovedListToApi({
 }: PushApproveListToApi) {
   try {
     yield put(setLoading(true))
-    const wishList: WishList = yield call(
-      cartService.pushConfirmedListsToApi,
-      list
-    )
-    console.log('sagas', wishList)
+    yield call(cartService.pushConfirmedListsToApi, list)
     yield put(setLoading(false))
   } catch (error) {}
 }

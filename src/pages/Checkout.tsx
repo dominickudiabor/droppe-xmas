@@ -1,4 +1,5 @@
-import { CheckoutItem } from 'components/checkoutItem'
+import { CheckoutItem } from 'components/CheckoutItem'
+import Page from 'components/Page'
 import { nanoid } from 'nanoid'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,7 +18,7 @@ const Checkout = () => {
   const { approved, discarded, wishLists } = useSelector(
     (state: AppState) => state.cart
   )
-  console.log(approved)
+
   useEffect(() => {
     async function loadTotal(
       list: UpdatedListItems[],
@@ -98,10 +99,7 @@ const Checkout = () => {
   }
 
   return (
-    <div className="page">
-      <div className="header">
-        <h2>Checkout</h2>
-      </div>
+    <Page header="Checkout">
       <div className="checkout">
         {renderCheckoutLists(['Approved', 'Discarded'])}
       </div>
@@ -109,7 +107,7 @@ const Checkout = () => {
         <button onClick={handleNavigation}>Return to edit</button>
         <button onClick={handleConfirmation}>Confirm List</button>
       </div>
-    </div>
+    </Page>
   )
 }
 export default Checkout

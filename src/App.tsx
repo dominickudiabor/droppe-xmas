@@ -1,5 +1,5 @@
 import axios from 'axios'
-import Spinner from 'components/spinner'
+import Spinner from 'components/Spinner'
 import Cart from 'pages/Cart'
 import Checkout from 'pages/Checkout'
 import Home from 'pages/Home'

@@ -1,5 +1,5 @@
 import Page from 'components/Page'
-import WishItem from 'components/wishItem'
+import WishItem from 'components/WishItem'
 import { nanoid } from 'nanoid'
 import React from 'react'
 import { useSelector } from 'react-redux'

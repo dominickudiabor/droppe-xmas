@@ -36,7 +36,7 @@ export default {
             date: moment().format('YYYY-MM-DD'),
             products: combinedList,
           })
-          console.log(combinedResponse)
+
           await combinedResponse.push({ ...response.data })
         }
       }

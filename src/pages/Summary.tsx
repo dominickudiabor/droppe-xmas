@@ -1,3 +1,4 @@
+import Page from 'components/Page'
 import { KIDS } from 'data/kids'
 import moment from 'moment'
 import { nanoid } from 'nanoid'
@@ -70,11 +71,7 @@ const Summary = () => {
   }
 
   return (
-    <div className="page">
-      <div className="header">
-        <h2>Summary</h2>
-        <button onClick={handleNavigation}>Return to Homepage</button>
-      </div>
+    <Page header="Summary">
       <div className="confirmation">
         <div className="confirmation__header title">
           <h2>ORDER CONFIRMATION</h2>
@@ -91,8 +88,11 @@ const Summary = () => {
           {renderChildApprovedList(KIDS.cartList)}
           {renderTotalCartListDetails(cartTotalforWishlists)}
         </div>
+        <div className="base-buttons">
+          <button onClick={handleNavigation}>Return to Homepage</button>
+        </div>
       </div>
-    </div>
+    </Page>
   )
 }
 

@@ -38,7 +38,7 @@ export function executeWishListItemStatus(
 ): CartActions {
   return {
     type: EXECUTE_WISHLIST_ITEM_STATUS,
-    payload: itemStatus,
+    payload: { status: itemStatus },
   }
 }
 
@@ -47,7 +47,7 @@ export function updateWishlistItemApprovalStatus(
 ): CartActions {
   return {
     type: UPDATE_WISHLIST_ITEM_APPROVAL_STATUS,
-    payload: itemStatus,
+    payload: { status: itemStatus },
   }
 }
 
@@ -56,7 +56,7 @@ export function updateApprovalAndDiscardedList(
 ): CartActions {
   return {
     type: UPDATE_APPROVAL_AND_DISCARDED_LIST,
-    payload: updatedList,
+    payload: { updated: updatedList },
   }
 }
 

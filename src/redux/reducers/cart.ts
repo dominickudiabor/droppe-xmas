@@ -31,7 +31,7 @@ export function cart(
     }
   }
   case UPDATE_WISHLIST_ITEM_APPROVAL_STATUS: {
-    const { item, status, name } = action.payload
+    const { item, status, name } = action.payload.status
     const childSpecificList = state.wishLists[name].properties
     const itemToUpdate = childSpecificList.findIndex((a) => a.id === item.id)
     childSpecificList[itemToUpdate].confirmed = status
@@ -57,7 +57,10 @@ export function cart(
   }
 
   case UPDATE_APPROVAL_AND_DISCARDED_LIST: {
-    const { updatedApprovedList, updatedRejectedList } = action.payload
+    const {
+      updatedApprovedList,
+      updatedRejectedList,
+    } = action.payload.updated
     return {
       ...state,
       approved: updatedApprovedList,

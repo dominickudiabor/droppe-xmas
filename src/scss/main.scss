@@ -1,7 +1,9 @@
 @import 'abstract/variables';
+@import 'abstract/mixins';
+@import 'abstract/globals';
 @import 'base/reset';
 @import 'base/typography';
 @import 'abstract/fonts';
-@import 'abstract/mixins';
+
 @import 'components/index.scss';
 @import 'pages/index.scss';
