@@ -2,8 +2,8 @@
   &__title {
     text-align: center;
     font-weight: 800;
-    background-color: #0c88cf;
-    color: #ffff;
+    background-color: var(--background-color-02);
+    color: var(--color-white);
     padding: 4% 0;
     border-radius: 15px 15px 0 0;
   }
@@ -25,7 +25,7 @@
 
   &__summary {
     padding: 4% 0;
-    background-color: #ffd900;
+    background-color: var (--background-color-03);
     display: flex;
     justify-content: space-around;
     border-radius: 0 0 15px 15px;

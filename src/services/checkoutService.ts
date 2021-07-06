@@ -5,9 +5,16 @@ export default {
     try {
       let approvedList: UpdatedListItems[] = []
       let rejectedList: UpdatedListItems[] = []
+      let combinedAggregatedList: UpdatedListItems[] = []
+
       for (const key in wishlist) {
         approvedList = [...approvedList, ...wishlist[key].approved]
         rejectedList = [...rejectedList, ...wishlist[key].discarded]
+        combinedAggregatedList = [
+          ...combinedAggregatedList,
+          ...wishlist[key].approved,
+          ...wishlist[key].discarded,
+        ]
       }
 
       const mapApproved = new Map()
@@ -38,11 +45,16 @@ export default {
         mapRejected.values()
       )
 
-      return { updatedApprovedList, updatedRejectedList }
+      const findUnconfirmed = combinedAggregatedList.find(
+        (a) => a.confirmed === 'Pending'
+      )
+
+      return { updatedApprovedList, updatedRejectedList, findUnconfirmed }
     } catch (error) {
       return null
     }
   },
+
   computeTotalOnListItems: async (list: UpdatedListItems[]) => {
     try {
       const computeDiscount = (a: UpdatedListItems) => {

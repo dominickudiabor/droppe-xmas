@@ -11,6 +11,7 @@ export default {
       return error.response
     }
   },
+
   loopListFetchProducts: async (list: WishItems[]) => {
     const accList: UpdatedListItems[] = []
     try {
@@ -24,6 +25,7 @@ export default {
       return
     }
   },
+
   pushConfirmedListsToApi: async (list: ChildSpecificProperties) => {
     let combinedResponse: {}[] = []
     try {

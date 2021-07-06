@@ -37,7 +37,7 @@ const Checkout = () => {
     loadTotal(discarded, setDiscardedTotal)
   }, [approved, discarded])
 
-  const handleNavigation = () => history.goBack()
+  const handleNavigation = () => history.push('/')
   const handleConfirmation = () => {
     dispatch(
       updateCombinedCartTotal({
@@ -99,13 +99,15 @@ const Checkout = () => {
   }
 
   return (
-    <Page header="Checkout">
+    <Page
+      header="Checkout"
+      button={{ name: 'Confirm Approved List', purpose: handleConfirmation }}
+    >
       <div className="checkout">
         {renderCheckoutLists(['Approved', 'Discarded'])}
       </div>
       <div className="base-buttons">
         <button onClick={handleNavigation}>Return to edit</button>
-        <button onClick={handleConfirmation}>Confirm List</button>
       </div>
     </Page>
   )

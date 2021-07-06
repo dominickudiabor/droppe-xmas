@@ -1,7 +1,7 @@
 import Page from 'components/Page'
 import { KIDS } from 'data/kids'
 import { nanoid } from 'nanoid'
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import {
@@ -13,10 +13,11 @@ import checkoutService from 'services/checkoutService'
 import { CartListProperties, ChildSpecificProperties } from 'types'
 
 const Home = () => {
+  const [confirmedItemCount, setConfirmedItemCount] = useState(false)
   const history = useHistory()
   const dispatch = useDispatch()
-  const { wishLists } = useSelector((state: AppState) => state.cart)
   const defaultChildlist = KIDS.cartList
+  const { wishLists } = useSelector((state: AppState) => state.cart)
 
   const renderCartList = (cartList: CartListProperties[]) => {
     return cartList.map((c) => (
@@ -40,15 +41,22 @@ const Home = () => {
   const handleCheckout = async (data: ChildSpecificProperties) => {
     const response = await checkoutService.createAggregatedList(data)
     if (!response) return
-    const { updatedApprovedList, updatedRejectedList } = response
-
-    dispatch(
-      updateApprovalAndDiscardedList({
-        updatedApprovedList,
-        updatedRejectedList,
-      })
-    )
-    history.push('/checkout')
+    const {
+      updatedApprovedList,
+      updatedRejectedList,
+      findUnconfirmed,
+    } = response
+    if (!findUnconfirmed) {
+      setConfirmedItemCount(true)
+      dispatch(
+        updateApprovalAndDiscardedList({
+          updatedApprovedList,
+          updatedRejectedList,
+        })
+      )
+      history.push('/checkout')
+    }
+    return
   }
 
   return (
@@ -57,8 +65,12 @@ const Home = () => {
         <div className="list">{renderCartList(defaultChildlist)}</div>
       </div>
       <div className="base-buttons">
+        <p className="error">
+          Please confirm or discard each item in the lists to proceed to
+          checkout
+        </p>
         <button
-          hidden={Object.keys(wishLists).length !== defaultChildlist.length}
+          disabled={!confirmedItemCount}
           onClick={() => handleCheckout(wishLists)}
         >
           Proceed to Checkout

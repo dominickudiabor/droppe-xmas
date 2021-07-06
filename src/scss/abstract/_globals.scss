@@ -1,8 +1,8 @@
-button {
+button:not(.Toast) {
   $button-color: var(--button-color-primary);
   padding: 0 5%;
   background-color: var(--button-color-primary);
-  color: white;
+  color: var(--color-white);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -22,7 +22,7 @@ button {
     background-color: var(--button-color-success);
   }
   &:disabled {
-    display: none;
+    background-color: var(--background-color-04);
   }
 }
 
@@ -35,7 +35,7 @@ button {
   justify-content: space-around;
   align-items: center;
   margin-bottom: 3%;
-  background-color: #ffff;
+  background-color: var(--color-white);
   padding: 3% 0;
 
   > h2 {
@@ -44,11 +44,27 @@ button {
 }
 
 .card {
-  background-color: #ffff;
+  background-color: var(--color-white);
   margin: 5% auto;
   border-radius: 16px;
 
   @media only screen and (min-width: 800px) {
     width: 70%;
+  }
+}
+
+.error {
+  color: var(--button-color-danger);
+  text-align: center;
+  font-weight: 600;
+}
+
+.base-buttons {
+  margin: 4% 0;
+  text-align: center;
+
+  button {
+    width: 50%;
+    margin: 0 auto;
   }
 }

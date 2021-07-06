@@ -72,26 +72,28 @@ const Summary = () => {
 
   return (
     <Page header="Summary">
-      <div className="confirmation">
-        <div className="confirmation__header title">
-          <h2>ORDER CONFIRMATION</h2>
-          <p>
-            Thank you for your order , we would contact you as soon as your
-            package is shipped. You can find your purchase information below.
-          </p>
+      {cartTotalforWishlists.length < 1 && (
+        <div className="confirmation">
+          <div className="confirmation__header title">
+            <h2>ORDER CONFIRMATION</h2>
+            <p>
+              Thank you for your order , we would contact you as soon as your
+              package is shipped. You can find your purchase information below.
+            </p>
+          </div>
+          <div className="confirmation__header subtitle">
+            <h3>Order Summary</h3>
+            <p>{moment().format('YYYY-MM-DD')}</p>
+          </div>
+          <div className="confirmation__content">
+            {renderChildApprovedList(KIDS.cartList)}
+            {renderTotalCartListDetails(cartTotalforWishlists)}
+          </div>
+          <div className="base-buttons">
+            <button onClick={handleNavigation}>Return to Homepage</button>
+          </div>
         </div>
-        <div className="confirmation__header subtitle">
-          <h3>Order Summary</h3>
-          <p>{moment().format('YYYY-MM-DD')}</p>
-        </div>
-        <div className="confirmation__content">
-          {renderChildApprovedList(KIDS.cartList)}
-          {renderTotalCartListDetails(cartTotalforWishlists)}
-        </div>
-        <div className="base-buttons">
-          <button onClick={handleNavigation}>Return to Homepage</button>
-        </div>
-      </div>
+      )}
     </Page>
   )
 }
