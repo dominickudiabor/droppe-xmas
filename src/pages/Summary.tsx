@@ -2,20 +2,25 @@ import { KIDS } from 'data/kids'
 import moment from 'moment'
 import { nanoid } from 'nanoid'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { clearCartAfterCompletedOrder } from 'redux/actions'
 import { AppState } from 'redux/models'
 import { CartTotal, TargetChildProperties, UpdatedListItems } from 'types'
 
 const Summary = () => {
   const history = useHistory()
+  const dispatch = useDispatch()
   const { wishLists, total } = useSelector((state: AppState) => state.cart)
   const totalApprove = total['approved']
   const totalDiscarded = total['discarded']
 
   const cartTotalforWishlists = [totalApprove, totalDiscarded]
 
-  const handleNavigation = () => history.push('/')
+  const handleNavigation = () => {
+    dispatch(clearCartAfterCompletedOrder())
+    history.push('/')
+  }
 
   const renderchildApprovalListDetails = (list: UpdatedListItems[]) => {
     if (list.length < 1) return <p>None</p>
@@ -27,20 +32,24 @@ const Summary = () => {
   }
 
   const renderChildApprovedList = (kids: TargetChildProperties[]) => {
-    return kids.map((k) => (
-      <div className="confirmation__content-item" key={nanoid()}>
-        <h4>{k.name}</h4>
-        <h5>Approved</h5>
-        {renderchildApprovalListDetails(wishLists[k.name].approved)}
-        <h5>Discarded</h5>
-        {renderchildApprovalListDetails(wishLists[k.name].discarded)}
-      </div>
-    ))
+    return kids.map((k) => {
+      if (!wishLists[k.name]) return null
+
+      return (
+        <div className="confirmation__content-item" key={nanoid()}>
+          <h4>{k.name}</h4>
+          <h5>Approved</h5>
+          {renderchildApprovalListDetails(wishLists[k.name].approved)}
+          <h5>Discarded</h5>
+          {renderchildApprovalListDetails(wishLists[k.name].discarded)}
+        </div>
+      )
+    })
   }
 
   const renderTotalCartListDetails = (cartTotal: CartTotal[]) => {
     return cartTotal.map((c) => (
-      <div className="confirmation__content--total">
+      <div key={nanoid()} className="confirmation__content--total">
         <h3>{`Order total for ${c.type} list`}</h3>
         <div className="confirmation__content--total--detail">
           <p>

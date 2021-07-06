@@ -11,7 +11,7 @@ import { AppState } from 'redux/models'
 import checkoutService from 'services/checkoutService'
 import { CartListProperties, ChildSpecificProperties } from 'types'
 
-const CartList = () => {
+const Home = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const { wishLists } = useSelector((state: AppState) => state.cart)
@@ -35,10 +35,9 @@ const CartList = () => {
   }
 
   const handleCheckout = async (data: ChildSpecificProperties) => {
-    const {
-      updatedApprovedList,
-      updatedRejectedList,
-    } = await checkoutService.createAggregatedList(data)
+    const response = await checkoutService.createAggregatedList(data)
+    if (!response) return
+    const { updatedApprovedList, updatedRejectedList } = response
 
     dispatch(
       updateApprovalAndDiscardedList({
@@ -53,19 +52,21 @@ const CartList = () => {
     <div className="page">
       <div className="header">
         <h2>Droppe Xmas</h2>
-        <button
-          // disabled={defaultChildlist.length !== Object.keys(wishLists).length}
-          onClick={() => handleCheckout(wishLists)}
-        >
-          Proceed to Checkout
-        </button>
       </div>
 
       <div className="card">
         <div className="list">{renderCartList(defaultChildlist)}</div>
       </div>
+      <div className="base-buttons">
+        <button
+          disabled={Object.keys(wishLists).length < 1}
+          onClick={() => handleCheckout(wishLists)}
+        >
+          Proceed to Checkout
+        </button>
+      </div>
     </div>
   )
 }
 
-export default CartList
+export default Home

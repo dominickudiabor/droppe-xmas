@@ -1,8 +1,8 @@
 import axios from 'axios'
 import Spinner from 'components/spinner'
 import Cart from 'pages/Cart'
-import CartList from 'pages/CartList'
 import Checkout from 'pages/Checkout'
+import Home from 'pages/Home'
 import Summary from 'pages/Summary'
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
@@ -22,7 +22,7 @@ export default function App() {
 
   return (
     <Switch>
-      <Route exact path="/" component={CartList} />
+      <Route exact path="/" component={Home} />
       <Route exact path="/checkout" component={Checkout} />
       <Route exact path="/summary" component={Summary} />
       <Route path="/cart/:id" component={Cart} />

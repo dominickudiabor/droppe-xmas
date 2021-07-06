@@ -17,7 +17,7 @@ const Checkout = () => {
   const { approved, discarded, wishLists } = useSelector(
     (state: AppState) => state.cart
   )
-
+  console.log(approved)
   useEffect(() => {
     async function loadTotal(
       list: UpdatedListItems[],
@@ -27,9 +27,9 @@ const Checkout = () => {
         (arg0: { before: number; after: number }): void
       }
     ) {
-      const { before, after } = await checkoutService.computeTotalOnListItems(
-        list
-      )
+      const response = await checkoutService.computeTotalOnListItems(list)
+      if (!response) return
+      const { before, after } = response
       setTotal({ before, after })
     }
     loadTotal(approved, setApprovedTotal)
@@ -92,9 +92,6 @@ const Checkout = () => {
               €{l === 'Approved' ? approvedTotal.after : discardedTotal.after}
             </span>
           </p>
-          {l === 'Approved' && (
-            <button onClick={handleConfirmation}>Confirm List</button>
-          )}
         </div>
       </div>
     ))
@@ -104,10 +101,13 @@ const Checkout = () => {
     <div className="page">
       <div className="header">
         <h2>Checkout</h2>
-        <button onClick={handleNavigation}>Return to edit</button>
       </div>
       <div className="checkout">
         {renderCheckoutLists(['Approved', 'Discarded'])}
+      </div>
+      <div className="base-buttons">
+        <button onClick={handleNavigation}>Return to edit</button>
+        <button onClick={handleConfirmation}>Confirm List</button>
       </div>
     </div>
   )

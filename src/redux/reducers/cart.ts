@@ -1,6 +1,7 @@
 import { CartState } from 'redux/models'
 import {
   CartActions,
+  CLEAR_CART_AFTER_COMPLETED_ORDER,
   LOAD_UI_WITH_FETCHED_WISHLIST,
   UPDATE_APPROVAL_AND_DISCARDED_LIST,
   UPDATE_COMBINED_CART_TOTAL,
@@ -73,6 +74,16 @@ export function cart(
         approved: approved,
         discarded: discarded,
       },
+    }
+  }
+
+  case CLEAR_CART_AFTER_COMPLETED_ORDER: {
+    return {
+      ...state,
+      wishLists: {},
+      approved: [],
+      discarded: [],
+      total: {},
     }
   }
   default:

@@ -7,6 +7,7 @@ import {
 } from 'types'
 import {
   CartActions,
+  CLEAR_CART_AFTER_COMPLETED_ORDER,
   EXECUTE_WISHLIST_ITEM_STATUS,
   FETCH_WISHLIST,
   LOAD_UI_WITH_FETCHED_WISHLIST,
@@ -74,5 +75,11 @@ export function updateCombinedCartTotal(
   return {
     type: UPDATE_COMBINED_CART_TOTAL,
     payload: { total: cartTotal },
+  }
+}
+
+export function clearCartAfterCompletedOrder(): CartActions {
+  return {
+    type: CLEAR_CART_AFTER_COMPLETED_ORDER,
   }
 }

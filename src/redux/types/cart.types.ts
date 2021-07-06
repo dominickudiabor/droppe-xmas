@@ -13,6 +13,8 @@ export const UPDATE_APPROVAL_AND_DISCARDED_LIST =
   'UPDATE_APPROVAL_AND_DISCARDED_LIST'
 export const PUSH_APPROVAL_LIST_TO_API = 'PUSH_APPROVAL_LIST_TO_API'
 export const UPDATE_COMBINED_CART_TOTAL = 'UPDATE_COMBINED_CART_TOTAL'
+export const CLEAR_CART_AFTER_COMPLETED_ORDER =
+  'CLEAR_CART_AFTER_COMPLETED_ORDER'
 
 export type FetchWishList = {
   type: typeof FETCH_WISHLIST
@@ -67,6 +69,10 @@ export type UpdateCombinedCartTotal = {
   }
 }
 
+export type ClearCartAfterCompletedOrder = {
+  type: typeof CLEAR_CART_AFTER_COMPLETED_ORDER
+}
+
 export type CartActions =
   | FetchWishList
   | LoadUiWithFetchedWishlist
@@ -75,3 +81,4 @@ export type CartActions =
   | UpdateApprovalAndDiscardedList
   | PushApproveListToApi
   | UpdateCombinedCartTotal
+  | ClearCartAfterCompletedOrder
