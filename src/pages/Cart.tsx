@@ -1,3 +1,4 @@
+import Page from 'components/Page'
 import WishItem from 'components/wishItem'
 import { nanoid } from 'nanoid'
 import React from 'react'
@@ -25,14 +26,14 @@ const Cart: React.FC = () => {
   const handleNavigation = () => history.push('/')
 
   return (
-    <div className="page cart">
-      <div className="header">
-        <h2>{`Wishlist for ${id}`}</h2>
-        <button onClick={handleNavigation}>Return to Homepage</button>
+    <Page header={`Wishlist for ${id}`}>
+      <div className="cart__list">
+        {renderWishListDetails(userWishList)}
+        <div className="base-buttons">
+          <button onClick={handleNavigation}>Return to Homepage</button>
+        </div>
       </div>
-
-      <div className="cart__list">{renderWishListDetails(userWishList)}</div>
-    </div>
+    </Page>
   )
 }
 

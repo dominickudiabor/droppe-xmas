@@ -4,7 +4,7 @@ You should use either `npm` or `yarn` but not both. It's recommeded to use `yarn
 
 yarn start
 
-# Frontend pre-assignment—Droppe Xmas 🎄
+# Christmas shopping list s🎄
 
 Abstract
 You’re building an intuitive cart approval process for parents. That is, a flow with high usability for an imaginary christmas gift picking marketplace. The primary user persona of your interface will be a 50 year old parent with differing (usually low) levels of tech nativeness.

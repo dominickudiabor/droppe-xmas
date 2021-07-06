@@ -1,3 +1,4 @@
+import Page from 'components/Page'
 import { KIDS } from 'data/kids'
 import { nanoid } from 'nanoid'
 import React from 'react'
@@ -23,7 +24,9 @@ const Home = () => {
         <p>
           <span>{c.name},</span> <span>{c.age}years</span>
         </p>
-        <button onClick={() => loadWishList(c.name, c.id)}>View Cart</button>
+        <button onClick={() => loadWishList(c.name, c.id)}>
+          View Wishlist
+        </button>
       </div>
     ))
   }
@@ -49,23 +52,19 @@ const Home = () => {
   }
 
   return (
-    <div className="page">
-      <div className="header">
-        <h2>Droppe Xmas</h2>
-      </div>
-
+    <Page header="Droppe Xmas">
       <div className="card">
         <div className="list">{renderCartList(defaultChildlist)}</div>
       </div>
       <div className="base-buttons">
         <button
-          disabled={Object.keys(wishLists).length < 1}
+          hidden={Object.keys(wishLists).length !== defaultChildlist.length}
           onClick={() => handleCheckout(wishLists)}
         >
           Proceed to Checkout
         </button>
       </div>
-    </div>
+    </Page>
   )
 }
 
