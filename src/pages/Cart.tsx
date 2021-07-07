@@ -1,5 +1,5 @@
 import Page from 'components/Page'
-import WishItem from 'components/WishItem'
+import WishListCard from 'components/WishItem'
 import { nanoid } from 'nanoid'
 import React from 'react'
 import { useSelector } from 'react-redux'
@@ -18,7 +18,7 @@ const Cart: React.FC = () => {
   const renderWishListDetails = (list: UpdatedListItems[] = []) => {
     return list.map((l) => (
       <div className="card" key={nanoid()}>
-        <WishItem itemDetails={{ ...l }} />
+        <WishListCard itemDetails={{ ...l }} />
       </div>
     ))
   }

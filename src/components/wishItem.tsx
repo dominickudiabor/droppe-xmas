@@ -8,7 +8,7 @@ interface WishItemProps {
   itemDetails: UpdatedListItems
 }
 
-const WishItem: React.FC<WishItemProps> = ({ itemDetails }) => {
+const WishListCard: React.FC<WishItemProps> = ({ itemDetails }) => {
   const dispatch = useDispatch()
   const { id } = useParams<{ id: string }>()
 
@@ -71,4 +71,4 @@ const WishItem: React.FC<WishItemProps> = ({ itemDetails }) => {
   )
 }
 
-export default WishItem
+export default WishListCard
