@@ -8,15 +8,17 @@
     border-radius: 15px 15px 0 0;
   }
   &__content {
-    padding: 5%;
+    padding: 5% 7%;
     display: flex;
+    justify-content: space-between;
 
     &--image {
-      width: 15vw;
-      margin-right: 3%;
+      width: 20vw;
+      margin-right: 5%;
     }
 
     &--description {
+      width: 45vw;
       align-self: center;
       font-weight: 400;
       line-height: 1, 2em;
@@ -25,7 +27,6 @@
 
   &__summary {
     padding: 4% 0;
-    background-color: var (--background-color-03);
     display: flex;
     justify-content: space-around;
     border-radius: 0 0 15px 15px;
