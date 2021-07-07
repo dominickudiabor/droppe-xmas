@@ -34,8 +34,6 @@ const Home = () => {
         setChildListCountConfirmed(combinedAggregatedList)
         setIsCheckoutActivate(unconfirmed.includes(true))
       }
-
-      console.log('list', findComfimedList)
     }
     findAggregate()
   }, [wishLists])
