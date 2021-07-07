@@ -18,8 +18,7 @@ const Cart: React.FC = () => {
   const renderWishListDetails = (list: UpdatedListItems[] = []) => {
     return list.map((l) => (
       <div className="card" key={nanoid()}>
-        {' '}
-        <WishItem {...l} />{' '}
+        <WishItem itemDetails={{ ...l }} />
       </div>
     ))
   }
