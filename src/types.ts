@@ -71,3 +71,7 @@ export interface CartTotal {
 export interface CombinedCartTotals {
   [name: string]: CartTotal
 }
+
+export interface AggregatedChildConfirmList {
+  [name: string]: boolean
+}
