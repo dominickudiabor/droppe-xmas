@@ -1,7 +1,6 @@
 import { applyMiddleware, compose, createStore } from 'redux'
 import { persistStore } from 'redux-persist'
 import createSagaMiddleware from 'redux-saga'
-import thunk from 'redux-thunk'
 import { AppState } from './models'
 import rootReducer from './reducers'
 import rootSaga from './sagas'
@@ -20,7 +19,7 @@ const initState: AppState = {
 
 export default function makeStore(initialState = initState) {
   const sagaMiddleware = createSagaMiddleware()
-  const middlewares = [sagaMiddleware, thunk]
+  const middlewares = [sagaMiddleware]
   let composeEnhancers = compose
 
   if (process.env.NODE_ENV === 'development') {
