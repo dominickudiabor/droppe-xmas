@@ -1,7 +1,7 @@
 import Page from 'components/Page'
 import { KIDS } from 'data/kids'
 import { nanoid } from 'nanoid'
-import React, { useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import {
@@ -13,11 +13,32 @@ import checkoutService from 'services/checkoutService'
 import { CartListProperties, ChildSpecificProperties } from 'types'
 
 const Home = () => {
-  const [confirmedItemCount, setConfirmedItemCount] = useState(false)
+  const [childListCountConfirmed, setChildListCountConfirmed] = useState<{
+    [name: string]: boolean
+  }>({})
+  const [ischeckoutActivate, setIsCheckoutActivate] = useState(false)
+
   const history = useHistory()
   const dispatch = useDispatch()
   const defaultChildlist = KIDS.cartList
+
   const { wishLists } = useSelector((state: AppState) => state.cart)
+
+  useLayoutEffect(() => {
+    async function findAggregate() {
+      const findComfimedList = await checkoutService.findUnconfirmedItem(
+        wishLists
+      )
+      if (findComfimedList) {
+        const { combinedAggregatedList, unconfirmed } = findComfimedList
+        setChildListCountConfirmed(combinedAggregatedList)
+        setIsCheckoutActivate(unconfirmed.includes(true))
+      }
+
+      console.log('list', findComfimedList)
+    }
+    findAggregate()
+  }, [wishLists])
 
   const renderCartList = (cartList: CartListProperties[]) => {
     return cartList.map((c) => (
@@ -25,7 +46,10 @@ const Home = () => {
         <p>
           <span>{c.name},</span> <span>{c.age}years</span>
         </p>
-        <button onClick={() => loadWishList(c.name, c.id)}>
+        <button
+          className={childListCountConfirmed[c.name] ? 'edit' : ''}
+          onClick={() => loadWishList(c.name, c.id)}
+        >
           View Wishlist
         </button>
       </div>
@@ -41,21 +65,15 @@ const Home = () => {
   const handleCheckout = async (data: ChildSpecificProperties) => {
     const response = await checkoutService.createAggregatedList(data)
     if (!response) return
-    const {
-      updatedApprovedList,
-      updatedRejectedList,
-      findUnconfirmed,
-    } = response
-    if (!findUnconfirmed) {
-      setConfirmedItemCount(true)
-      dispatch(
-        updateApprovalAndDiscardedList({
-          updatedApprovedList,
-          updatedRejectedList,
-        })
-      )
-      history.push('/checkout')
-    }
+    const { updatedApprovedList, updatedRejectedList } = response
+    dispatch(
+      updateApprovalAndDiscardedList({
+        updatedApprovedList,
+        updatedRejectedList,
+      })
+    )
+    history.push('/checkout')
+
     return
   }
 
@@ -70,7 +88,7 @@ const Home = () => {
           checkout
         </p>
         <button
-          disabled={!confirmedItemCount}
+          disabled={ischeckoutActivate}
           onClick={() => handleCheckout(wishLists)}
         >
           Proceed to Checkout

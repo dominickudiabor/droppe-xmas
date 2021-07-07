@@ -1,20 +1,18 @@
-import { ChildSpecificProperties, UpdatedListItems } from 'types'
+import {
+  AggregatedChildConfirmList,
+  ChildSpecificProperties,
+  UpdatedListItems,
+} from 'types'
 
 export default {
   createAggregatedList: async (wishlist: ChildSpecificProperties) => {
     try {
       let approvedList: UpdatedListItems[] = []
       let rejectedList: UpdatedListItems[] = []
-      let combinedAggregatedList: UpdatedListItems[] = []
 
       for (const key in wishlist) {
         approvedList = [...approvedList, ...wishlist[key].approved]
         rejectedList = [...rejectedList, ...wishlist[key].discarded]
-        combinedAggregatedList = [
-          ...combinedAggregatedList,
-          ...wishlist[key].approved,
-          ...wishlist[key].discarded,
-        ]
       }
 
       const mapApproved = new Map()
@@ -45,12 +43,34 @@ export default {
         mapRejected.values()
       )
 
-      const findUnconfirmed = combinedAggregatedList.find(
-        (a) => a.confirmed === 'Pending'
-      )
-
-      return { updatedApprovedList, updatedRejectedList, findUnconfirmed }
+      return { updatedApprovedList, updatedRejectedList }
     } catch (error) {
+      return null
+    }
+  },
+
+  findUnconfirmedItem: async (wishlist: ChildSpecificProperties) => {
+    try {
+      let combinedAggregatedList: AggregatedChildConfirmList = {}
+
+      for (let key in wishlist) {
+        let combinedList = [...wishlist[key].properties]
+
+        const findUnconfirmed = combinedList.find(
+          (a) => a.confirmed === 'Pending'
+        )
+        combinedAggregatedList = {
+          ...combinedAggregatedList,
+          [key]: Boolean(findUnconfirmed),
+        }
+      }
+
+      return {
+        combinedAggregatedList,
+        unconfirmed: Object.values(combinedAggregatedList),
+      }
+    } catch (error) {
+      console.log(error)
       return null
     }
   },
