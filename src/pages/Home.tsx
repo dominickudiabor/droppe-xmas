@@ -16,7 +16,7 @@ const Home = () => {
   const [childListCountConfirmed, setChildListCountConfirmed] = useState<{
     [name: string]: boolean
   }>({})
-  const [ischeckoutActivate, setIsCheckoutActivate] = useState(false)
+  const [ischeckoutActivate, setIsCheckoutActivate] = useState(true)
 
   const history = useHistory()
   const dispatch = useDispatch()
@@ -32,6 +32,7 @@ const Home = () => {
       if (findComfimedList) {
         const { combinedAggregatedList, unconfirmed } = findComfimedList
         setChildListCountConfirmed(combinedAggregatedList)
+        if (unconfirmed.length === 0) return setIsCheckoutActivate(true)
         setIsCheckoutActivate(unconfirmed.includes(true))
       }
     }
