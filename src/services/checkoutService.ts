@@ -4,7 +4,7 @@ import {
   UpdatedListItems,
 } from 'types'
 
-export default {
+const checkoutService = {
   createAggregatedList: async (wishlist: ChildSpecificProperties) => {
     try {
       let approvedList: UpdatedListItems[] = []
@@ -105,3 +105,5 @@ export default {
     }
   },
 }
+
+export default checkoutService

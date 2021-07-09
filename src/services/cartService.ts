@@ -2,7 +2,7 @@ import axios from 'axios'
 import moment from 'moment'
 import { ChildSpecificProperties, UpdatedListItems, WishItems } from 'types'
 
-export default {
+const cartService = {
   fetchListPerChild: async (id: number) => {
     try {
       const response = await axios.get(`/carts/${id}`)
@@ -47,3 +47,4 @@ export default {
     } catch (error) {}
   },
 }
+export default cartService

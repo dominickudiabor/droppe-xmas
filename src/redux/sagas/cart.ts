@@ -9,6 +9,11 @@ import {
 import cartService from 'services/cartService'
 import { UpdatedListItems, WishList } from 'types'
 
+const cartSagas = [
+  takeEvery(FETCH_WISHLIST, onfetchWishListAndUpdateUi),
+  takeLatest(PUSH_APPROVAL_LIST_TO_API, onPushApprovedListToApi),
+]
+
 export function* onfetchWishListAndUpdateUi({
   payload: { id, name },
 }: FetchWishList) {
@@ -35,7 +40,4 @@ export function* onPushApprovedListToApi({
   } catch (error) {}
 }
 
-export default [
-  takeEvery(FETCH_WISHLIST, onfetchWishListAndUpdateUi),
-  takeLatest(PUSH_APPROVAL_LIST_TO_API, onPushApprovedListToApi),
-]
+export default cartSagas
