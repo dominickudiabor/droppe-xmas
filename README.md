@@ -21,8 +21,3 @@ The user should get a discount if there are identical products on different chil
 3 identical products chosen => 30% reduction … and so on—these reduction rules are to be saved and handled on the client, the API doesn’t support this
 When the user has made the final choices of approving certain products, these choices should be pushed to the API. Save both approved and discarded carts per child to the API
 The user should see a final confirmation screen with an easy overview of the new data saved on the API—aggregated approved cart with possible relating savings as well as an aggregate disregarded cart overview
-
-##Issues
-Error: Node Sass version 6.0.1 is incompatible with ^4.0.0. may appear if you use node 16.4.2.
-Solution : Downgrade npm to 14.15.4 .
-Node sass's recent update doesn't fix this error.

@@ -23,7 +23,6 @@ const Home = () => {
   const defaultChildlist = KIDS.cartList
 
   const { wishLists } = useSelector((state: AppState) => state.cart)
-
   useLayoutEffect(() => {
     async function findAggregate() {
       const findComfimedList = await checkoutService.findUnconfirmedItem(
@@ -62,6 +61,11 @@ const Home = () => {
   }
 
   const handleCheckout = async (data: ChildSpecificProperties) => {
+    if (
+      KIDS.cartList.length !== Object.keys(wishLists).length &&
+      ischeckoutActivate
+    )
+      return
     const response = await checkoutService.createAggregatedList(data)
     if (!response) return
     const { updatedApprovedList, updatedRejectedList } = response
@@ -87,7 +91,7 @@ const Home = () => {
           checkout
         </p>
         <button
-          disabled={ischeckoutActivate}
+          disabled={KIDS.cartList.length !== Object.keys(wishLists).length}
           onClick={() => handleCheckout(wishLists)}
         >
           Proceed to Checkout
