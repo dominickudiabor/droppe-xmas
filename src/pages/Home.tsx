@@ -48,7 +48,9 @@ const Home = () => {
           className={childListItemsConfirmed[c.name.firstname] ? '' : 'edit'}
           onClick={() => loadWishList(c.name.firstname, c.id)}
         >
-          View Wishlist
+          {childListItemsConfirmed[c.name.firstname]
+            ? 'Edit WishList'
+            : ' View Wishlist'}
         </button>
       </div>
     ))

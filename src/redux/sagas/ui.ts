@@ -4,8 +4,10 @@ import { FETCH_USER_DATA } from 'redux/types/ui.types'
 import uiService from 'services/uiService'
 import { UserListProperties } from 'types'
 
+//watcher sagas
 const uiSagas = [takeLatest(FETCH_USER_DATA, onAppRenderLoadUserData)]
 
+//worker sagas
 export function* onAppRenderLoadUserData() {
   try {
     yield put(setLoading(true))
