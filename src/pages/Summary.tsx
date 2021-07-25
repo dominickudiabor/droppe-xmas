@@ -1,5 +1,4 @@
 import Page from 'components/Page'
-import { KIDS } from 'data/kids'
 import moment from 'moment'
 import { nanoid } from 'nanoid'
 import React from 'react'
@@ -7,12 +6,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { clearCartAfterCompletedOrder } from 'redux/actions'
 import { AppState } from 'redux/models'
-import { CartTotal, TargetChildProperties, UpdatedListItems } from 'types'
+import { CartTotal, UpdatedListItems, UserListProperties } from 'types'
 
 const Summary = () => {
   const history = useHistory()
   const dispatch = useDispatch()
   const { wishLists, total } = useSelector((state: AppState) => state.cart)
+  const { users } = useSelector((state: AppState) => state.ui)
+
   const totalApprove = total['approved']
   const totalDiscarded = total['discarded']
 
@@ -32,17 +33,19 @@ const Summary = () => {
     ))
   }
 
-  const renderChildApprovedList = (kids: TargetChildProperties[]) => {
-    return kids.map((k) => {
-      if (!wishLists[k.name]) return null
+  const renderChildApprovedList = (users: UserListProperties[]) => {
+    return users.map((k) => {
+      if (!wishLists[k.name.firstname]) return null
 
       return (
         <div className="confirmation__content-item" key={nanoid()}>
-          <h4>{k.name}</h4>
+          <h4>{k.name.firstname}</h4>
           <h5>Approved</h5>
-          {renderchildApprovalListDetails(wishLists[k.name].approved)}
+          {renderchildApprovalListDetails(wishLists[k.name.firstname].approved)}
           <h5>Discarded</h5>
-          {renderchildApprovalListDetails(wishLists[k.name].discarded)}
+          {renderchildApprovalListDetails(
+            wishLists[k.name.firstname].discarded
+          )}
         </div>
       )
     })
@@ -85,7 +88,7 @@ const Summary = () => {
           <p>{moment().format('YYYY-MM-DD')}</p>
         </div>
         <div className="confirmation__content">
-          {renderChildApprovedList(KIDS.cartList)}
+          {renderChildApprovedList(users)}
           {renderTotalCartListDetails(cartTotalforWishlists)}
         </div>
         <div className="base-buttons">

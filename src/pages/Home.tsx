@@ -1,5 +1,4 @@
 import Page from 'components/Page'
-import { KIDS } from 'data/kids'
 import { nanoid } from 'nanoid'
 import React, { useLayoutEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,7 +9,7 @@ import {
 } from 'redux/actions/cart'
 import { AppState } from 'redux/models'
 import checkoutService from 'services/checkoutService'
-import { CartListProperties, ChildSpecificProperties } from 'types'
+import { ChildSpecificProperties, UserListProperties } from 'types'
 
 const Home = () => {
   const [childListCountConfirmed, setChildListCountConfirmed] = useState<{
@@ -20,9 +19,10 @@ const Home = () => {
 
   const history = useHistory()
   const dispatch = useDispatch()
-  const defaultChildlist = KIDS.cartList
 
   const { wishLists } = useSelector((state: AppState) => state.cart)
+  const { users } = useSelector((state: AppState) => state.ui)
+
   useLayoutEffect(() => {
     async function findAggregate() {
       const findComfimedList = await checkoutService.findUnconfirmedItem(
@@ -38,15 +38,15 @@ const Home = () => {
     findAggregate()
   }, [wishLists])
 
-  const renderCartList = (cartList: CartListProperties[]) => {
+  const renderCartList = (cartList: UserListProperties[]) => {
     return cartList.map((c) => (
       <div key={nanoid()} className="list__item">
         <p>
-          <span>{c.name},</span> <span>{c.age}years</span>
+          <span>{`${c.name.firstname} ${c.name.lastname}`}</span>
         </p>
         <button
-          className={childListCountConfirmed[c.name] ? 'edit' : ''}
-          onClick={() => loadWishList(c.name, c.id)}
+          className={childListCountConfirmed[c.name.firstname] ? 'edit' : ''}
+          onClick={() => loadWishList(c.name.firstname, c.id)}
         >
           View Wishlist
         </button>
@@ -61,10 +61,7 @@ const Home = () => {
   }
 
   const handleCheckout = async (data: ChildSpecificProperties) => {
-    if (
-      KIDS.cartList.length !== Object.keys(wishLists).length &&
-      ischeckoutActivate
-    )
+    if (users.length !== Object.keys(wishLists).length && ischeckoutActivate)
       return
     const response = await checkoutService.createAggregatedList(data)
     if (!response) return
@@ -83,7 +80,7 @@ const Home = () => {
   return (
     <Page header="Droppe Xmas">
       <div className="card">
-        <div className="list">{renderCartList(defaultChildlist)}</div>
+        <div className="list">{renderCartList(users)}</div>
       </div>
       <div className="base-buttons">
         <p className="error">
@@ -91,7 +88,7 @@ const Home = () => {
           checkout
         </p>
         <button
-          disabled={KIDS.cartList.length !== Object.keys(wishLists).length}
+          disabled={users.length !== Object.keys(wishLists).length}
           onClick={() => handleCheckout(wishLists)}
         >
           Proceed to Checkout
