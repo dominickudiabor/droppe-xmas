@@ -28,7 +28,7 @@ export default function makeStore(initialState = initState) {
     }
   }
 
-  const store: any = createStore(
+  const store = createStore(
     rootReducer,
     initialState,
     composeEnhancers(applyMiddleware(...middlewares))
