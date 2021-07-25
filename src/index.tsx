@@ -1,4 +1,5 @@
-import React from 'react'
+import Spinner from 'components/Spinner'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
@@ -14,7 +15,9 @@ const WithProvider = () => (
   <Provider store={store}>
     <Router>
       <PersistGate loading={null} persistor={persistor}>
-        <App />
+        <Suspense fallback={<Spinner />}>
+          <App />
+        </Suspense>
       </PersistGate>
     </Router>
   </Provider>

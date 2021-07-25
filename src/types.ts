@@ -34,6 +34,11 @@ export interface CartListProperties {
   age: number
 }
 
+export interface UserListProperties {
+  id: number
+  name: { firstname: string; lastname: string }
+}
+
 export interface WishListStatusConfirmation {
   item: UpdatedListItems
   status: 'Confirmed' | 'Discarded'

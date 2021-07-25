@@ -2,6 +2,7 @@ import {
   ChildSpecificProperties,
   CombinedCartTotals,
   UpdatedListItems,
+  UserListProperties,
 } from 'types'
 
 export type AppState = {
@@ -11,6 +12,7 @@ export type AppState = {
 
 export interface UiState {
   loading: boolean
+  users: UserListProperties[]
 }
 
 export interface CartState {
