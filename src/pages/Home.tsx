@@ -1,6 +1,6 @@
 import Page from 'components/Page'
 import { nanoid } from 'nanoid'
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import {
@@ -12,10 +12,11 @@ import checkoutService from 'services/checkoutService'
 import { ChildSpecificProperties, UserListProperties } from 'types'
 
 const Home = () => {
-  const [childListCountConfirmed, setChildListCountConfirmed] = useState<{
+  const [childListItemsConfirmed, setChildListItemsConfirmed] = useState<{
     [name: string]: boolean
   }>({})
-  const [ischeckoutActivate, setIsCheckoutActivate] = useState(true)
+
+  const [activateCheckout, setActivateCheckout] = useState(false)
 
   const history = useHistory()
   const dispatch = useDispatch()
@@ -23,16 +24,15 @@ const Home = () => {
   const { wishLists } = useSelector((state: AppState) => state.cart)
   const { users } = useSelector((state: AppState) => state.ui)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     async function findAggregate() {
-      const findComfimedList = await checkoutService.findUnconfirmedItem(
+      const unconfirmedListItem = await checkoutService.findUnconfirmedItem(
         wishLists
       )
-      if (findComfimedList) {
-        const { combinedAggregatedList, unconfirmed } = findComfimedList
-        setChildListCountConfirmed(combinedAggregatedList)
-        if (unconfirmed.length === 0) return setIsCheckoutActivate(true)
-        setIsCheckoutActivate(unconfirmed.includes(true))
+
+      if (unconfirmedListItem) {
+        setChildListItemsConfirmed(unconfirmedListItem.aggregatedConfirmedList)
+        setActivateCheckout(unconfirmedListItem.allItemsConfirmed)
       }
     }
     findAggregate()
@@ -45,7 +45,7 @@ const Home = () => {
           <span>{`${c.name.firstname} ${c.name.lastname}`}</span>
         </p>
         <button
-          className={childListCountConfirmed[c.name.firstname] ? 'edit' : ''}
+          className={childListItemsConfirmed[c.name.firstname] ? '' : 'edit'}
           onClick={() => loadWishList(c.name.firstname, c.id)}
         >
           View Wishlist
@@ -61,8 +61,6 @@ const Home = () => {
   }
 
   const handleCheckout = async (data: ChildSpecificProperties) => {
-    if (users.length !== Object.keys(wishLists).length && ischeckoutActivate)
-      return
     const response = await checkoutService.createAggregatedList(data)
     if (!response) return
     const { updatedApprovedList, updatedRejectedList } = response
@@ -88,7 +86,11 @@ const Home = () => {
           checkout
         </p>
         <button
-          disabled={users.length !== Object.keys(wishLists).length}
+          disabled={
+            activateCheckout && users.length === Object.keys(wishLists).length
+              ? false
+              : true
+          }
           onClick={() => handleCheckout(wishLists)}
         >
           Proceed to Checkout

@@ -56,18 +56,20 @@ const checkoutService = {
       for (let key in wishlist) {
         let combinedList = [...wishlist[key].properties]
 
-        const findUnconfirmed = combinedList.find(
-          (a) => a.confirmed === 'Pending'
+        const findUnconfirmed = combinedList.every(
+          (a) => a.confirmed !== 'Pending'
         )
+
         combinedAggregatedList = {
           ...combinedAggregatedList,
-          [key]: Boolean(findUnconfirmed),
+          [key]: findUnconfirmed,
         }
       }
-
       return {
-        combinedAggregatedList,
-        unconfirmed: Object.values(combinedAggregatedList),
+        aggregatedConfirmedList: combinedAggregatedList,
+        allItemsConfirmed: [...Object.values(combinedAggregatedList)].every(
+          (a) => a === true
+        ),
       }
     } catch (error) {
       return null
