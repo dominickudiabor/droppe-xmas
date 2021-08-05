@@ -1,5 +1,5 @@
 import { UiState } from 'redux/models'
-import { UiActions } from '../types/ui.types'
+import { LOAD_USER_DATA, SET_LOADING, UiActions } from '../types/ui.types'
 
 const defaultState: UiState = {
   loading: false,
@@ -8,10 +8,10 @@ const defaultState: UiState = {
 
 export function ui(state: UiState = defaultState, action: UiActions): UiState {
   switch (action.type) {
-    case 'SET_LOADING':
+    case SET_LOADING:
       return { ...state, loading: action.payload.isLoading }
 
-    case 'LOAD_USER_DATA':
+    case LOAD_USER_DATA:
       return { ...state, users: action.payload.users }
 
     default:
