@@ -4,7 +4,11 @@ import { nanoid } from 'nanoid'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { pushApprovesListToApi, updateCombinedCartTotal } from 'redux/actions'
+import {
+  pushApprovesListToApi,
+  setLoading,
+  updateCombinedCartTotal,
+} from 'redux/actions'
 import { AppState } from 'redux/models'
 import checkoutService from 'services/checkoutService'
 import { UpdatedListItems } from 'types'
@@ -20,6 +24,7 @@ const Checkout = () => {
   )
 
   useEffect(() => {
+    dispatch(setLoading(true))
     async function loadTotal(
       list: UpdatedListItems[],
       setTotal: {
@@ -35,7 +40,8 @@ const Checkout = () => {
     }
     loadTotal(approved, setApprovedTotal)
     loadTotal(discarded, setDiscardedTotal)
-  }, [approved, discarded])
+    dispatch(setLoading(false))
+  }, [approved, discarded, dispatch])
 
   const handleNavigation = () => history.push('/')
   const handleConfirmation = () => {

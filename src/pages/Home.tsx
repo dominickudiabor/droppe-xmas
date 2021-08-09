@@ -38,6 +38,11 @@ const Home = () => {
     findAggregate()
   }, [wishLists])
 
+  const loadWishList = (name: string, id: number) => {
+    dispatch(fetchWishList(id, name))
+    history.push(`/cart/${name}`)
+  }
+
   const renderCartList = (cartList: UserListProperties[]) => {
     return cartList.map((c) => (
       <div key={nanoid()} className="list__item">
@@ -56,16 +61,11 @@ const Home = () => {
     ))
   }
 
-  const loadWishList = (name: string, id: number) => {
-    history.push(`/cart/${name}`)
-    if (!!wishLists[name]) return
-    dispatch(fetchWishList(id, name))
-  }
-
   const handleCheckout = async (data: ChildSpecificProperties) => {
     const response = await checkoutService.createAggregatedList(data)
     if (!response) return
     const { updatedApprovedList, updatedRejectedList } = response
+    console.log(updatedApprovedList)
     dispatch(
       updateApprovalAndDiscardedList({
         updatedApprovedList,

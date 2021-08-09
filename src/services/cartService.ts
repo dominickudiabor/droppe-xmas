@@ -15,10 +15,15 @@ const cartService = {
   loopListFetchProducts: async (list: WishItems[]) => {
     const accList: UpdatedListItems[] = []
     try {
-      for (let i = 0; i < list.length; i++) {
-        const productId = list[i].productId
-        const response = await axios.get(`/products/${productId}`)
-        accList.push({ ...response.data, ...list[i], confirmed: 'Pending' })
+      //loop through user list and fetch all product information
+      for (const name of list) {
+        const response = await axios.get(`/products/${name.productId}`)
+        accList.push({
+          ...response.data,
+          confirmed: 'Pending',
+          quantity: 1,
+          productId: name.productId,
+        })
       }
       return accList
     } catch (error) {

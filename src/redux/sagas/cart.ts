@@ -20,7 +20,6 @@ export function* onfetchWishListAndUpdateUi({
   try {
     yield put(setLoading(true))
     const wishList: WishList = yield call(cartService.fetchListPerChild, id)
-    wishList.products.map((a) => (a.quantity = 1))
     const updatedWishList: UpdatedListItems[] = yield call(
       cartService.loopListFetchProducts,
       wishList.products

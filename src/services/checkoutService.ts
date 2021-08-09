@@ -10,11 +10,13 @@ const checkoutService = {
       let approvedList: UpdatedListItems[] = []
       let rejectedList: UpdatedListItems[] = []
 
+      //extract the confirmation lists from the users data and aggregate it in an array
       for (const key in wishlist) {
         approvedList = [...approvedList, ...wishlist[key].approved]
         rejectedList = [...rejectedList, ...wishlist[key].discarded]
       }
 
+      //loop through array and replace duplicates with increased quantity
       const mapApproved = new Map()
       approvedList.forEach((item) => {
         if (mapApproved.has(item.productId)) {
